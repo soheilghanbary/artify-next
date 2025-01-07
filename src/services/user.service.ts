@@ -10,7 +10,7 @@ const getUserById = async (id: string) => {
 }
 
 const updateUser = async (id: string, data: any) => {
-  const res = await client.patch(`/users/${id}`, data)
+  const res = await client.put(`/users/${id}`, data)
   return res.data
 }
 

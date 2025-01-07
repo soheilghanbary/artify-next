@@ -5,7 +5,8 @@ import { UserCollections } from '@/components/features/profile/UserCollections'
 import { UserProducts } from '@/components/features/profile/UserProducts'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { getUserProfile } from '@/services/auth.service'
+import { auth } from '@/server/lib/auth'
+import { getUserById } from '@/services/user.service'
 import { EditIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -13,8 +14,10 @@ import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 
 export default async () => {
-  const user = await getUserProfile()
-  if (!user) return notFound()
+  const session = await auth()
+  const user = await getUserById(session?.user?.id!)
+
+  if (!user) notFound()
 
   return (
     <div className="mx-auto max-w-screen-xl md:py-8">

@@ -8,7 +8,6 @@ import {
   useSearchProducts,
   useUserProducts,
 } from '@/hooks/useProducts'
-import type { ProductProps } from '@/types/product'
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
 import { useQueryState } from 'nuqs'

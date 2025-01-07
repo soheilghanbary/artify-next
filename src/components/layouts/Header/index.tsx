@@ -1,10 +1,6 @@
-import {
-  GridViewIcon,
-  Home01Icon,
-  PuzzleIcon,
-  Search01Icon,
-} from '@/components/icons'
-import { CheckAuth } from './CheckAuth'
+import { Home01Icon, PuzzleIcon, Search01Icon } from '@/components/icons'
+import { Suspense } from 'react'
+import { CheckAuth, CheckAuthSkeleton } from './CheckAuth'
 import { Logo } from './Logo'
 import { NavLink } from './NavLink'
 
@@ -17,9 +13,10 @@ export const Header = () => {
           <NavLink href="/" label="Home" icon={Home01Icon} />
           <NavLink href="/search" label="Search" icon={Search01Icon} />
           <NavLink href="/about" label="About" icon={PuzzleIcon} />
-          {/* <ProductSearch /> */}
         </nav>
-        <CheckAuth />
+        <Suspense fallback={<CheckAuthSkeleton />}>
+          <CheckAuth />
+        </Suspense>
       </nav>
     </header>
   )

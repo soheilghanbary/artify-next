@@ -1,10 +1,9 @@
 import { client } from '@/lib/api'
-import { cache } from 'react'
 
-export const getAllProducts = cache(async () => {
+export const getAllProducts = async () => {
   const res = await client.get('/products')
   return res.data as ProductProps[]
-})
+}
 
 export const getProductById = async (id: string) => {
   const res = await client.get(`/products/${id}`)

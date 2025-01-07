@@ -1,39 +1,28 @@
 'use client'
 import { GoogleIcon, LoadingIcon } from '@/components/icons'
 import { Button } from '@/components/ui/button'
-import type React from 'react'
-import { useEffect, useState } from 'react'
+import { onSignIn } from '@/server/actions/auth.action'
+import { useTransition } from 'react'
 
 export const OAuth = () => {
-  const searchParams = new URLSearchParams(window.location.search)
-  const [loading, setLoading] = useState({
-    google: false,
-  })
+  const [pending, startTransition] = useTransition()
 
-  const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const provider = e.currentTarget.name as 'google'
-    setLoading((prev) => ({ ...prev, [provider]: true }))
-    window.location.href = `/api/auth/${provider}`
+  const handleLogin = async (provider: 'google' | 'github') => {
+    startTransition(async () => {
+      await onSignIn(provider)
+    })
   }
-
-  useEffect(() => {
-    console.log(searchParams.get('token'))
-  }, [])
 
   return (
     <Button
       name="google"
       className="w-full"
       variant={'secondary'}
-      onClick={handleLogin}
-      disabled={loading.google}
+      disabled={pending}
+      onClick={() => handleLogin('google')}
     >
-      {loading.google ? (
-        <LoadingIcon className="fill-primary" />
-      ) : (
-        <GoogleIcon />
-      )}
-      Google
+      {pending ? <LoadingIcon className="fill-primary" /> : <GoogleIcon />}
+      Sign In with Google
     </Button>
   )
 }

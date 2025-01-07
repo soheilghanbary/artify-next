@@ -26,7 +26,7 @@ export const AddProductImage = ({ onUploaded }: Props) => {
   return (
     <button
       type="button"
-      className="relative flex aspect-[4/3] flex-col items-center justify-center gap-2 rounded-md border bg-muted/20"
+      className="relative flex aspect-[4/3] flex-col items-center justify-center gap-2 rounded-md border border-dashed bg-muted/20"
       disabled={loading}
       aria-label="Upload product image"
       {...getRootProps()}

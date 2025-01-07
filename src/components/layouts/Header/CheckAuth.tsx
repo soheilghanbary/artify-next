@@ -1,13 +1,12 @@
-'use client'
 import { AuthModal } from '@/components/features/AuthModal'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
-import { useUserProfile } from '@/hooks/useUsers'
+import { auth } from '@/server/lib/auth'
 import { BadgePlus } from 'lucide-react'
 import Link from 'next/link'
 import { UserProfile } from './UserProfile'
 
-const ProfileLoader = () => (
+export const CheckAuthSkeleton = () => (
   <div className="flex items-center gap-4">
     <Skeleton className="h-10 w-28 rounded-full" />
     <Skeleton className="size-10 rounded-full" />
@@ -23,15 +22,12 @@ const NewProductButton = () => (
   </Button>
 )
 
-export const CheckAuth = () => {
-  const { data: user, isPending } = useUserProfile()
-
-  if (isPending) return <ProfileLoader />
-
-  return user ? (
+export const CheckAuth = async () => {
+  const session = await auth()
+  return session ? (
     <div className="flex items-center gap-4">
       <NewProductButton />
-      <UserProfile name={user?.name!} image={user?.image!} />
+      <UserProfile name={session.user?.name!} image={session.user?.image!} />
     </div>
   ) : (
     <AuthModal />

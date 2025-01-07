@@ -61,7 +61,7 @@
 
 @layer base {
   * {
-    @apply border-border select-none outline-none scroll-smooth;
+    @apply border-border outline-none scroll-smooth;
   }
   body {
     @apply bg-background text-foreground;
@@ -78,4 +78,9 @@
 
 body::-webkit-scrollbar {
   display: none;;
+}
+
+::selection {
+  color: hsl(var(--primary-foreground));
+  background: hsl(var(--primary));
 }

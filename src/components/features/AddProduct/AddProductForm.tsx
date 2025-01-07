@@ -12,28 +12,28 @@ import toast from 'react-hot-toast'
 import { z } from 'zod'
 import { AddProductImage } from './AddProductImage'
 
+type Props = {
+  userId: string
+}
+
+type Schema = z.infer<typeof schema>
+
 const schema = z.object({
   title: z.string().min(3, 'Title must be at least 3 characters'),
   image: z.string().min(1, 'Image is required'),
   description: z.string().min(3, 'Description must be at least 3 characters'),
+  userId: z.string().min(10, 'User ID is required'),
 })
 
-type Schema = z.infer<typeof schema>
-
 const createProduct = async (data: any) => {
-  const token = Cookies.get('token')
   const res = await fetch('/api/products', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
     body: JSON.stringify(data),
   })
   return res.json()
 }
 
-export const AddProductForm = () => {
+export const AddProductForm = ({ userId }: Props) => {
   const [pending, startTransition] = useTransition()
   const {
     register,
@@ -45,8 +45,9 @@ export const AddProductForm = () => {
     resolver: zodResolver(schema),
     defaultValues: {
       title: '',
-      description: '',
       image: '',
+      description: '',
+      userId,
     },
   })
 

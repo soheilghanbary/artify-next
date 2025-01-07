@@ -1,14 +1,6 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  async rewrites() {
-    return [
-      {
-        source: '/api/:path*', // Match all API routes
-        destination: `${process.env.NEXT_PUBLIC_API_URL}/api/:path*`, // Proxy to API route
-      }
-    ];
-  },
   env: {
     LIARA_ENDPOINT: process.env.LIARA_ENDPOINT,
     LIARA_BUCKET_NAME: process.env.LIARA_BUCKET_NAME,

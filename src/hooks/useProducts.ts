@@ -1,5 +1,4 @@
 import { getMoreProducts } from '@/services/products.service'
-import type { ProductProps } from '@/types/product'
 import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query'
 
 export const useCreateProduct = () => {
@@ -21,7 +20,7 @@ export const useSearchProducts = (query: string) => {
   return useQuery<ProductProps[], Error>({
     queryKey: ['search-products', query],
     queryFn: () =>
-      fetch(`/api/products/${query}/search`).then((res) => res.json()),
+      fetch(`/api/products/search?q=${query}`).then((res) => res.json()),
     refetchOnMount: false,
     refetchOnReconnect: true,
     refetchOnWindowFocus: false,

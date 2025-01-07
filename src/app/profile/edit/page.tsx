@@ -1,9 +1,11 @@
 import { BackButton } from '@/components/common/back-button'
 import { EditUserForm } from '@/components/features/EditUser/EditUserForm'
-import { getUserProfile } from '@/services/auth.service'
+import { auth } from '@/server/lib/auth'
+import { getUserById } from '@/services/user.service'
 
 export default async function EditProfilePage() {
-  const user = await getUserProfile()
+  const session = await auth()
+  const user = await getUserById(session?.user?.id!)
 
   return (
     <div className="space-y-6">
