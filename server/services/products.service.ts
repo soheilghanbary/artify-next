@@ -42,9 +42,12 @@ export class ProductsService {
   }
 
   async getMoreById(id: string, userId: string) {
-    return await db.query.productsTable.findMany({
-      where: and(ne(productsTable.id, id), eq(productsTable.userId, userId)),
-    })
+    return await db
+      .select()
+      .from(productsTable)
+      .where(and(ne(productsTable.id, id), eq(productsTable.userId, userId)))
+      .orderBy(desc(productsTable.createdAt))
+      .limit(4)
   }
 
   async search(query: string) {
