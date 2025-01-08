@@ -5,6 +5,7 @@ type ProductProps = {
   image: string
   createdAt: Date
   updatedAt: Date
+  view: number
   tags: string[]
   likes: { userId: string }[]
   categoryId?: null

@@ -20,7 +20,7 @@ const SearchProducts = () => {
 
 const Hero = () => {
   return (
-    <div className="relative flex flex-col items-center justify-center px-4 py-12">
+    <div className="relative flex flex-col items-center justify-center px-4 py-6">
       <h1 className="motion-preset-fade-sm text-center font-black text-3xl/tight tracking-tight md:text-5xl/tight">
         Search any Products
       </h1>

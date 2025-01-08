@@ -1,7 +1,6 @@
 'use client'
+import { ViewIcon } from '@/components/icons'
 import { cn } from '@/lib/utils'
-import type { ProductProps } from '@/types/product'
-import { EyeIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -63,7 +62,7 @@ const ViewCount = ({ view }: { view: number }) => (
     type="button"
     className="flex items-center gap-1 text-foreground/80 text-xs"
   >
-    <EyeIcon className="size-3.5" />
+    <ViewIcon className="size-4" />
     {view}
   </button>
 )

@@ -1,4 +1,5 @@
 import { ProductImage } from '@/components/features/Product/ProductImage'
+import { ViewIcon } from '@/components/icons'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
@@ -61,9 +62,13 @@ export const Product = ({ userId, product, isLoggedIn }: Props) => {
         className="text-foreground/85 text-xs/6 md:text-base/7 [&_a]:font-bold [&_a]:text-primary [&_a]:underline [&_a]:decoration-wavy-offset-4 [&_a]:decoration-wavy [&_a]:underline-offset-4"
         dangerouslySetInnerHTML={{ __html: product.description }}
       />
-      <p className="text-foreground/85 text-xs/5">
-        Published {fromNow(product.createdAt)}
-      </p>
+      <div className="flex items-center gap-4">
+        <p className="text-foreground/85 text-xs/5">
+          Published {fromNow(product.createdAt)}
+        </p>
+        <Separator orientation="vertical" className="h-3" />
+        <p className="text-foreground/85 text-xs/5">{product.view} views</p>
+      </div>
       {!!product.tags.length && (
         <>
           <h2 className="font-semibold text-sm">Tags</h2>
