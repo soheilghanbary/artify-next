@@ -60,6 +60,9 @@
       },
       "security": {
         "noDangerouslySetInnerHtml": "off"
+      },
+      "complexity": {
+        "noForEach": "off"
       }
     }
   }

@@ -1,6 +1,6 @@
 'use server'
-import { cookies } from "next/headers"
-import { redirect } from "next/navigation"
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 
 export const setToken = async (token: string) => {
   const cookie = await cookies()

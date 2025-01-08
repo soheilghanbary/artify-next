@@ -1,7 +1,7 @@
-import { Hono } from "hono";
-import { ProductsService } from "../services/products.service";
+import { Hono } from 'hono'
+import { ProductsService } from '../services/products.service'
 
-const productsService = new ProductsService();
+const productsService = new ProductsService()
 
 export const productsRoutes = new Hono()
   .get('/', async (c) => {

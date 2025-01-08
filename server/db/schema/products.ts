@@ -1,8 +1,8 @@
 import { relations, sql } from 'drizzle-orm'
 import { integer, pgTable, text, timestamp, varchar } from 'drizzle-orm/pg-core'
 import { categoriesTable } from './categories'
-import { usersTable } from './users'
 import { likesTable } from './likes'
+import { usersTable } from './users'
 
 export const productsTable = pgTable('products', {
   id: varchar('id', { length: 36 })

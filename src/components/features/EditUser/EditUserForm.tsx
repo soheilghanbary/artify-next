@@ -4,14 +4,14 @@ import { Tiptap } from '@/components/common/tiptap'
 import { LoadingIcon } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
+import { updateUser } from '@/services/user.service'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { z } from 'zod'
-import { EditUserImage } from './EditUserImage'
-import { updateUser } from '@/services/user.service'
 import { EditUserCover } from './EditUserCover'
+import { EditUserImage } from './EditUserImage'
 
 const schema = z.object({
   image: z.string(),

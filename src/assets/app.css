@@ -77,7 +77,7 @@
 }
 
 body::-webkit-scrollbar {
-  display: none;;
+  display: none;
 }
 
 ::selection {

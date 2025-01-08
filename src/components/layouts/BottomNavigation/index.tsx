@@ -1,6 +1,6 @@
 import { getToken } from '@/helpers/token'
-import { NavigationBar } from './NavigationBar'
 import { auth } from '@/server/lib/auth'
+import { NavigationBar } from './NavigationBar'
 
 export default async () => {
   const session = await auth()

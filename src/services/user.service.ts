@@ -1,4 +1,4 @@
-import { client } from "@/lib/api"
+import { client } from '@/lib/api'
 
 const getUserById = async (id: string) => {
   try {

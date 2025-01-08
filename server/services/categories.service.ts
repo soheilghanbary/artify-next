@@ -1,7 +1,7 @@
-import { db } from "../db";
+import { db } from '../db'
 
 export class CategoriesService {
   async getAll() {
-    return await db.query.categoriesTable.findMany();
+    return await db.query.categoriesTable.findMany()
   }
 }

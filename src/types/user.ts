@@ -30,4 +30,3 @@ type UserProps = {
   github: string
   linkedin: string
 }
-

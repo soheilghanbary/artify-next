@@ -83,7 +83,11 @@ const config = {
       },
     },
   },
-  plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography'), require('tailwindcss-motion')],
+  plugins: [
+    require('tailwindcss-animate'),
+    require('@tailwindcss/typography'),
+    require('tailwindcss-motion'),
+  ],
 } satisfies Config
 
 export default config
