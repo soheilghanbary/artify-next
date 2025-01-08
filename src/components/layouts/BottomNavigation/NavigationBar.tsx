@@ -6,6 +6,7 @@ import {
   Search01Icon,
   User01Icon,
 } from '@/components/icons'
+import { cn } from '@/lib/utils'
 import { BadgePlus } from 'lucide-react'
 import { NavigationLink } from './NavigationLink'
 
@@ -15,7 +16,12 @@ type Props = {
 
 export const NavigationBar = ({ isSigned }: Props) => {
   return (
-    <nav className="fixed bottom-0 left-0 z-20 grid w-full grid-cols-4 items-center border-t bg-background text-foreground/75 md:hidden">
+    <nav
+      className={cn(
+        'fixed bottom-0 left-0 z-20 grid w-full items-center border-t bg-background text-foreground/75 md:hidden',
+        isSigned ? 'grid-cols-4' : 'grid-cols-3'
+      )}
+    >
       <NavigationLink icon={Home01Icon} label="Home" href="/" />
       <NavigationLink icon={Search01Icon} label="Search" href="/search" />
       {isSigned ? (
