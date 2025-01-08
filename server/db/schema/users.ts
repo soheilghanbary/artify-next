@@ -6,7 +6,6 @@ import {
   uniqueIndex,
   varchar
 } from 'drizzle-orm/pg-core';
-import { collectionsTable } from './collections';
 import { productsTable } from './products';
 
 export const usersTable = pgTable(
@@ -36,7 +35,6 @@ export const usersTable = pgTable(
 );
 
 export const usersRelations = relations(usersTable, ({ many }) => ({
-  collections: many(collectionsTable),
   products: many(productsTable),
 }));
 

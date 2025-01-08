@@ -1,8 +1,7 @@
-import { Spinner } from '@/components/common/spinner'
 import { ProductsLoader } from '@/components/features/ProductList/ProductListLoader'
 import { UserAbout } from '@/components/features/profile/UserAbout'
-import { UserCollections } from '@/components/features/profile/UserCollections'
 import { UserProducts } from '@/components/features/profile/UserProducts'
+import { GridViewIcon, User01Icon } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { auth } from '@/server/lib/auth'
@@ -38,27 +37,24 @@ export default async () => {
             {user.title}
           </p>
           <Button asChild className="mt-2" variant={'outline'} size={'sm'}>
-            <Link href={'/profile/edit'}>
-              <EditIcon />
-              Edit Profile
-            </Link>
+            <Link href={'/profile/edit'}>Edit Profile</Link>
           </Button>
         </div>
       </div>
       <Tabs defaultValue="products">
-        <TabsList className="mx-auto mb-4 flex w-fit items-center justify-center">
-          <TabsTrigger value="products">Products</TabsTrigger>
-          <TabsTrigger value="collections">Collections</TabsTrigger>
-          <TabsTrigger value="about">About</TabsTrigger>
+        <TabsList className="mb-4 flex w-fit items-center justify-center">
+          <TabsTrigger value="products">
+            <GridViewIcon className="mr-2 size-4" />
+            Products
+          </TabsTrigger>
+          <TabsTrigger value="about">
+            <User01Icon className="mr-2 size-4" />
+            About
+          </TabsTrigger>
         </TabsList>
         <TabsContent value="products">
           <Suspense fallback={<ProductsLoader cols={3} />}>
             <UserProducts id={user.id} />
-          </Suspense>
-        </TabsContent>
-        <TabsContent value="collections">
-          <Suspense fallback={<Spinner />}>
-            <UserCollections id={user.id} />
           </Suspense>
         </TabsContent>
         <TabsContent value="about">
