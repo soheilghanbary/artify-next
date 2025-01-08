@@ -22,8 +22,8 @@ export const collectionsRoutes = new Hono()
   .put('/:id', async (c) => {
     const id = c.req.param('id')
     const values = await c.req.json()
-    const collection = await collectionsService.update({ ...values, id, userId })
-    return c.json(collection)
+    const collection = await collectionsService.update(id, values)
+    return c.json({ message: 'Collection updated! successfully' })
   })
   .delete('/:id', async (c) => {
     const id = c.req.param('id')

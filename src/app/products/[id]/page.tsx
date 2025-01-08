@@ -2,6 +2,7 @@ import { BackButton } from '@/components/common/back-button'
 import { Product } from '@/components/features/Product'
 import { ProductIncrementView } from '@/components/features/Product/ProductIncrementView'
 import { MoreProducts } from '@/components/features/ProductList'
+import { auth } from '@/server/lib/auth'
 import { getUserProfile } from '@/services/auth.service'
 import { getProductById } from '@/services/products.service'
 import { notFound } from 'next/navigation'
@@ -41,15 +42,19 @@ type Props = {
 
 export default async function ProductDetailPage({ params }: Props) {
   const { id } = await params
+  const session = await auth()
   const product = await getProductById(id)
-  const user = await getUserProfile()
 
   if (!product) return notFound()
 
   return (
     <div className="mx-auto flex max-w-4xl flex-col gap-4 py-2">
       <BackButton />
-      <Product product={product} isLoggedIn={!!user} userId={user?.id!} />
+      <Product
+        product={product}
+        isLoggedIn={!!session}
+        userId={session?.user?.id!}
+      />
       <div className="grid gap-4">
         <h2 className="font-medium">More by {product.user.name}</h2>
         <MoreProducts productId={id} userId={product.user.id} />

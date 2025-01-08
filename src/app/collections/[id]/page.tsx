@@ -4,7 +4,7 @@ import { EditCollectionModal } from '@/components/features/EditCollection/EditCo
 import { ProductList } from '@/components/features/ProductList/ProductList'
 import { ProductsLoader } from '@/components/features/ProductList/ProductListLoader'
 import { Button } from '@/components/ui/button'
-import { getUserProfile } from '@/services/auth.service'
+import { auth } from '@/server/lib/auth'
 import { getCollectionById } from '@/services/collections.service'
 import { getCollectionProducts } from '@/services/products.service'
 import { Share2Icon } from 'lucide-react'
@@ -20,12 +20,12 @@ const CollectionProducts = async ({
 }
 
 export default async ({ params }: { params: { id: string } }) => {
+  const session = await auth()
   const collection = await getCollectionById(params.id)
-  const user = await getUserProfile()
 
   if (!collection) return notFound()
 
-  const isCollectionUser = user?.id === collection?.userId
+  const isCollectionUser = collection?.userId === session?.user?.id
 
   return (
     <div className="space-y-4">
@@ -58,7 +58,7 @@ export default async ({ params }: { params: { id: string } }) => {
           <p>{collection.user.name}</p>
         </Link>
         {isCollectionUser && (
-          <EditCollectionModal userId={user?.id} {...collection} />
+          <EditCollectionModal userId={session?.user?.id} {...collection} />
         )}
       </div>
       <Suspense fallback={<ProductsLoader />}>

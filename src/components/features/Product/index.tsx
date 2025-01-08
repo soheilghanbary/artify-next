@@ -3,7 +3,6 @@ import { ProductLikeButton } from '@/components/features/Product/ProductLikeButt
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { fromNow } from '@/lib/utils'
-import type { ProductProps } from '@/types/product'
 import Link from 'next/link'
 import { ProductCopyButton } from './ProductCopyButton'
 import { ProductSaveModal } from './ProductSaveModal'
@@ -42,7 +41,7 @@ export const Product = ({ userId, product, isLoggedIn }: Props) => {
         <div className="flex flex-1 items-center justify-end gap-2">
           {isLoggedIn && (
             <>
-              <ProductLikeButton id={product.id} />
+              {/* <ProductLikeButton id={product.id} /> */}
               <ProductSaveModal
                 id={product.id}
                 userId={userId}

@@ -16,13 +16,14 @@ export class CollectionsService {
   async getById(id: string) {
     return await db.query.collectionsTable.findFirst({
       where: eq(collectionsTable.id, id),
+      with: { user: true }
     })
   }
   async create(values: any) {
     return await db.insert(collectionsTable).values(values)
   }
-  async update(values: any) {
-    return await db.update(collectionsTable).set(values).where(eq(collectionsTable.id, values.id))
+  async update(id: string, values: any) {
+    return await db.update(collectionsTable).set(values).where(eq(collectionsTable.id, id))
   }
   async delete(id: string) {
     return await db.delete(collectionsTable).where(eq(collectionsTable.id, id))

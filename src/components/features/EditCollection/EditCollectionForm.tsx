@@ -26,7 +26,7 @@ type Props = {
 
 const updateCollection = async (id: string, data: any) => {
   const res = await fetch(`/api/collections/${id}`, {
-    method: 'PATCH',
+    method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },

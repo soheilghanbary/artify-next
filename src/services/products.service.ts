@@ -29,7 +29,7 @@ export const addToCollection = async (
   productId: string,
   collectionId: string
 ) => {
-  const res = await client.post(`/products/${productId}/collections`, {
+  const res = await client.post(`/products/${productId}/save`, {
     productId,
     collectionId,
   })

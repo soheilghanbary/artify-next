@@ -3,7 +3,30 @@ import { db } from "../db"
 import { productsTable } from "../db/schema"
 
 export class ProductsService {
-  async getAll() {
+  async getAll(userId?: string, collectionId?: string) {
+    if (collectionId) {
+      return await db.query.productsTable.findMany({
+        where: eq(productsTable.collectionId, collectionId),
+        orderBy: desc(productsTable.createdAt),
+        with: {
+          user: {
+            columns: { id: true, name: true, image: true, username: true }
+          }
+        }
+      })
+    }
+
+    if (userId) {
+      return await db.query.productsTable.findMany({
+        where: eq(productsTable.userId, userId),
+        orderBy: desc(productsTable.createdAt),
+        with: {
+          user: {
+            columns: { id: true, name: true, image: true, username: true }
+          }
+        }
+      })
+    }
     return await db.query.productsTable.findMany({
       orderBy: desc(productsTable.createdAt),
       with: {
@@ -19,7 +42,7 @@ export class ProductsService {
       where: eq(productsTable.id, id),
       with: {
         user: {
-          columns: { id: true, name: true, image: true, username: true }
+          columns: { id: true, name: true, image: true, username: true, title: true }
         }
       }
     })
@@ -59,5 +82,9 @@ export class ProductsService {
         }
       }
     })
+  }
+
+  async save(productId: string, collectionId: string) {
+    return await db.update(productsTable).set({ collectionId }).where(eq(productsTable.id, productId)).execute()
   }
 }
