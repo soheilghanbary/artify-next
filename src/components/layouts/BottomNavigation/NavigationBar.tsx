@@ -3,7 +3,6 @@ import { AuthModal } from '@/components/features/AuthModal'
 import {
   Home01Icon,
   Login03Icon,
-  PuzzleIcon,
   Search01Icon,
   User01Icon,
 } from '@/components/icons'
