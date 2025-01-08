@@ -30,6 +30,7 @@ export class ProductsService {
       where: eq(productsTable.id, id),
       with: {
         category: { columns: { id: true, name: true } },
+        likes: { columns: { userId: true } },
         user: {
           columns: {
             id: true,

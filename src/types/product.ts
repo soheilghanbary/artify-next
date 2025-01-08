@@ -6,6 +6,7 @@ type ProductProps = {
   createdAt: Date
   updatedAt: Date
   tags: string[]
+  likes: { userId: string }[]
   categoryId?: null
   category: {
     id: string

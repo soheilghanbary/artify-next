@@ -2,30 +2,23 @@
 import { FavouriteIcon, LoadingIcon } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import { checkLike, createLike } from '@/services/likes.service'
-import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { useTransition } from 'react'
+import { toggleLike } from '@/services/likes.service'
+import { useState, useTransition } from 'react'
 
 type Props = {
-  id: string
+  productId: string
+  userId: string
+  hasLiked: boolean
 }
 
-export function ProductLikeButton({ id }: Props) {
+export function ProductLikeButton({ productId, userId, hasLiked }: Props) {
+  const [liked, setLiked] = useState(hasLiked)
   const [pending, mutate] = useTransition()
-  const qc = useQueryClient()
-  const { data: liked, isLoading } = useQuery({
-    queryKey: ['liked', id],
-    queryFn: () => checkLike(id),
-    refetchOnMount: false,
-    refetchOnReconnect: true,
-    refetchOnWindowFocus: false,
-  })
 
   const onSubmit = () => {
+    setLiked(!liked)
     mutate(async () => {
-      const res = await createLike(id)
-      await qc.cancelQueries()
-      qc.setQueryData(['liked', id], res.liked)
+      await toggleLike(productId, userId)
     })
   }
 
@@ -34,9 +27,9 @@ export function ProductLikeButton({ id }: Props) {
       size={'icon'}
       variant={'outline'}
       onClick={onSubmit}
-      className={pending || isLoading ? 'opacity-50' : ''}
+      className={pending ? 'opacity-50' : ''}
     >
-      {isLoading ? (
+      {pending ? (
         <LoadingIcon className="fill-rose-500" />
       ) : (
         <FavouriteIcon

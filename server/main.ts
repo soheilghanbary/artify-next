@@ -2,6 +2,7 @@ import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import { logger } from 'hono/logger'
 import { categoriesRoutes } from './routes/categories.route'
+import { likesRoutes } from './routes/likes.route'
 import { productsRoutes } from './routes/products.route'
 import { usersRoutes } from './routes/users.route'
 
@@ -21,7 +22,9 @@ app.use(
 )
 
 // routes
-const apiRoutes = app.basePath('/api')
+const apiRoutes = app
+  .basePath('/api')
   .route('/users', usersRoutes)
+  .route('/likes', likesRoutes)
   .route('/products', productsRoutes)
   .route('/categories', categoriesRoutes)

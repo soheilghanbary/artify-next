@@ -5,6 +5,7 @@ import { Separator } from '@/components/ui/separator'
 import { fromNow } from '@/lib/utils'
 import Link from 'next/link'
 import { ProductCopyButton } from './ProductCopyButton'
+import { ProductLikeButton } from './ProductLikeButton'
 
 type Props = {
   product: ProductProps
@@ -26,6 +27,7 @@ const UserProfileLink = ({ userId, image, name }: UserProfileLinkProps) => (
 )
 
 export const Product = ({ userId, product, isLoggedIn }: Props) => {
+  const hasLiked = product.likes.some((like) => like.userId === userId)
   return (
     <>
       <h1 className="motion-preset-fade-sm font-bold text-xl/snug sm:text-2xl/snug lg:text-4xl/tight">
@@ -38,6 +40,13 @@ export const Product = ({ userId, product, isLoggedIn }: Props) => {
           name={product.user.name}
         />
         <div className="flex flex-1 items-center justify-end gap-2">
+          {isLoggedIn && (
+            <ProductLikeButton
+              productId={product.id}
+              userId={userId}
+              hasLiked={hasLiked}
+            />
+          )}
           <ProductCopyButton />
         </div>
       </div>
