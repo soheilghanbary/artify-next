@@ -50,7 +50,7 @@ export const Product = ({ userId, product, isLoggedIn }: Props) => {
       <p className="text-foreground/85 text-xs/5">
         Published {fromNow(product.createdAt)}
       </p>
-      {product.tags.length && (
+      {!!product.tags.length && (
         <div className="inline-flex flex-wrap items-center gap-1">
           {product.tags.map((tag) => (
             <Link key={tag} href={`/search?q=${tag}`}>
