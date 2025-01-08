@@ -27,6 +27,7 @@ export function ProductLikeButton({ productId, userId, hasLiked }: Props) {
       size={'icon'}
       variant={'outline'}
       onClick={onSubmit}
+      disabled={pending}
       className={pending ? 'opacity-50' : ''}
     >
       {pending ? (

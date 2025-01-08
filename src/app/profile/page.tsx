@@ -1,12 +1,17 @@
 import { ProductsLoader } from '@/components/features/ProductList/ProductListLoader'
+import { LikedProducts } from '@/components/features/profile/LikedProducts'
 import { UserAbout } from '@/components/features/profile/UserAbout'
 import { UserProducts } from '@/components/features/profile/UserProducts'
-import { GridViewIcon, User01Icon } from '@/components/icons'
+import {
+  FavouriteIcon,
+  GridViewIcon,
+  LoadingIcon,
+  User01Icon,
+} from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { auth } from '@/server/lib/auth'
 import { getUserById } from '@/services/user.service'
-import { EditIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -47,6 +52,10 @@ export default async () => {
             <GridViewIcon className="mr-2 size-4" />
             Products
           </TabsTrigger>
+          <TabsTrigger value="liked">
+            <FavouriteIcon className="mr-2 size-4" />
+            Liked
+          </TabsTrigger>
           <TabsTrigger value="about">
             <User01Icon className="mr-2 size-4" />
             About
@@ -57,8 +66,11 @@ export default async () => {
             <UserProducts id={user.id} />
           </Suspense>
         </TabsContent>
+        <TabsContent value="liked">
+          <LikedProducts id={user.id} />
+        </TabsContent>
         <TabsContent value="about">
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<LoadingIcon className="mx-auto my-12 size-6" />}>
             <UserAbout {...user} />
           </Suspense>
         </TabsContent>

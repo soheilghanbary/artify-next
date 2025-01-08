@@ -1,48 +1,39 @@
-import { and, eq } from 'drizzle-orm'
 import { Hono } from 'hono'
-import { db } from '../db'
-import { likesTable } from '../db/schema'
+import { z } from 'zod'
+import { LikesService } from '../services/likes.service'
 
-export const likesRoutes = new Hono().post('/toggle', async (c) => {
-  const { userId, productId } = await c.req.json()
+const likesService = new LikesService()
 
-  if (!userId || !productId) {
-    return c.json({ error: 'userId and productId are required' }, 400)
-  }
+// Define a schema for request validation
+const toggleLikeSchema = z.object({
+  userId: z.string().uuid(), // Assuming userId is a UUID
+  productId: z.string().uuid(), // Assuming productId is a UUID
+})
 
-  try {
-    // Check if the user has already liked the product
-    const existingLike = await db
-      .select()
-      .from(likesTable)
-      .where(
-        and(eq(likesTable.userId, userId), eq(likesTable.productId, productId))
+export const likesRoutes = new Hono()
+  .get('/:userId', async (c) => {
+    const userId = c.req.param('userId')
+    const likes = await likesService.getByUserId(userId)
+    return c.json(likes)
+  })
+  .post('/', async (c) => {
+    const result = toggleLikeSchema.safeParse(await c.req.json())
+    if (!result.success) {
+      return c.json(
+        { error: 'Invalid input', details: result.error.flatten() },
+        400
       )
-
-    if (existingLike.length > 0) {
-      // If the like exists, remove it (unlike)
-      await db
-        .delete(likesTable)
-        .where(
-          and(
-            eq(likesTable.userId, userId),
-            eq(likesTable.productId, productId)
-          )
-        )
-
+    }
+    const { userId, productId } = result.data
+    const existingLike = await likesService.check(userId, productId)
+    if (existingLike) {
+      // Unlike the product
+      await likesService.remove(userId, productId)
       return c.json(
         { message: 'Product unliked successfully', liked: false },
         200
       )
     }
-    // If the like doesn't exist, add it (like)
-    await db.insert(likesTable).values({
-      userId: userId,
-      productId: productId,
-    })
+    await likesService.add(userId, productId)
     return c.json({ message: 'Product liked successfully', liked: true }, 201)
-  } catch (error) {
-    console.error('Error toggling like:', error)
-    return c.json({ error: 'Internal server error' }, 500)
-  }
-})
+  })
