@@ -6,13 +6,12 @@ import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { TagsInput } from '@/components/ui/tags-input'
 import { zodResolver } from '@hookform/resolvers/zod'
-import type { Tag } from 'emblor'
-import { useState, useTransition } from 'react'
+import { useTransition } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { array, z } from 'zod'
+import { AddProductCategory } from './AddProductCategory'
 import { AddProductImage } from './AddProductImage'
-import { AddProductTags } from './AddProductTags'
 
 type Props = {
   userId: string
@@ -24,6 +23,7 @@ const schema = z.object({
   title: z.string().min(3, 'Title must be at least 3 characters'),
   image: z.string().min(1, 'Image is required'),
   description: z.string().min(3, 'Description must be at least 3 characters'),
+  categoryId: z.string().min(3, 'Category required'),
   tags: array(z.string()),
   userId: z.string().min(10, 'User ID is required'),
 })
@@ -37,7 +37,6 @@ const createProduct = async (data: any) => {
 }
 
 export const AddProductForm = ({ userId }: Props) => {
-  const [tags, setTags] = useState<Tag[]>([])
   const [pending, startTransition] = useTransition()
   const {
     register,
@@ -51,6 +50,7 @@ export const AddProductForm = ({ userId }: Props) => {
       title: '',
       image: '',
       description: '',
+      categoryId: '',
       tags: [],
       userId,
     },
@@ -101,6 +101,24 @@ export const AddProductForm = ({ userId }: Props) => {
         {errors.description && (
           <span className="font-medium text-destructive text-xs">
             {errors.description.message}
+          </span>
+        )}
+      </div>
+      <div className="grid gap-2">
+        <Label>Select Category</Label>
+        <Controller
+          name="categoryId"
+          control={control}
+          render={({ field }) => (
+            <AddProductCategory
+              value={field.value}
+              onValueChange={field.onChange}
+            />
+          )}
+        />
+        {errors.categoryId && (
+          <span className="font-medium text-destructive text-xs">
+            {errors.categoryId.message}
           </span>
         )}
       </div>

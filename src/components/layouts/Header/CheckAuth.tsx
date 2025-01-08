@@ -1,10 +1,11 @@
 import { AuthModal } from '@/components/features/AuthModal'
-import { Button } from '@/components/ui/button'
+import { User01Icon } from '@/components/icons'
+import { Button, buttonVariants } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
+import { cn } from '@/lib/utils'
 import { auth } from '@/server/lib/auth'
 import { BadgePlus } from 'lucide-react'
 import Link from 'next/link'
-import { UserProfile } from './UserProfile'
 
 export const CheckAuthSkeleton = () => (
   <div className="flex items-center gap-4">
@@ -27,7 +28,19 @@ export const CheckAuth = async () => {
   return session ? (
     <div className="flex items-center gap-4">
       <NewProductButton />
-      <UserProfile name={session.user?.name!} image={session.user?.image!} />
+      <Link
+        href={'/profile'}
+        className={cn(
+          buttonVariants({
+            size: 'icon',
+            variant: 'outline',
+            fullRounded: true,
+          }),
+          '[&_svg]:size-5'
+        )}
+      >
+        <User01Icon />
+      </Link>
     </div>
   ) : (
     <AuthModal />

@@ -6,8 +6,7 @@ const productsService = new ProductsService();
 export const productsRoutes = new Hono()
   .get('/', async (c) => {
     const userId = c.req.query('userId')
-    const collectionId = c.req.query('collectionId')
-    const products = await productsService.getAll(userId, collectionId)
+    const products = await productsService.getAll(userId)
     return c.json(products)
   })
   .get('/search', async (c) => {
@@ -24,12 +23,6 @@ export const productsRoutes = new Hono()
     const values = await c.req.json()
     const product = await productsService.create(values)
     return c.json({ message: 'Product created successfully' })
-  })
-  .post('/:id/save', async (c) => {
-    const id = c.req.param('id')
-    const { collectionId } = await c.req.json() as { collectionId: string }
-    await productsService.save(id, collectionId)
-    return c.json({ message: 'Product saved successfully' })
   })
   .put('/:id', async (c) => {
     const id = c.req.param('id')

@@ -1,39 +1,27 @@
-import { and, arrayContains, desc, eq, ilike, ne, or, sql } from "drizzle-orm"
-import { db } from "../db"
-import { productsTable } from "../db/schema"
+import { and, arrayContains, desc, eq, ilike, ne, or, sql } from 'drizzle-orm'
+import { db } from '../db'
+import { productsTable } from '../db/schema'
 
 export class ProductsService {
-  async getAll(userId?: string, collectionId?: string) {
-    if (collectionId) {
-      return await db.query.productsTable.findMany({
-        where: eq(productsTable.collectionId, collectionId),
-        orderBy: desc(productsTable.createdAt),
-        with: {
-          user: {
-            columns: { id: true, name: true, image: true, username: true }
-          }
-        }
-      })
-    }
-
+  async getAll(userId?: string) {
     if (userId) {
       return await db.query.productsTable.findMany({
         where: eq(productsTable.userId, userId),
         orderBy: desc(productsTable.createdAt),
         with: {
           user: {
-            columns: { id: true, name: true, image: true, username: true }
-          }
-        }
+            columns: { id: true, name: true, image: true, username: true },
+          },
+        },
       })
     }
     return await db.query.productsTable.findMany({
       orderBy: desc(productsTable.createdAt),
       with: {
         user: {
-          columns: { id: true, name: true, image: true, username: true }
-        }
-      }
+          columns: { id: true, name: true, image: true, username: true },
+        },
+      },
     })
   }
 
@@ -41,10 +29,17 @@ export class ProductsService {
     return await db.query.productsTable.findFirst({
       where: eq(productsTable.id, id),
       with: {
+        category: { columns: { id: true, name: true } },
         user: {
-          columns: { id: true, name: true, image: true, username: true, title: true }
-        }
-      }
+          columns: {
+            id: true,
+            name: true,
+            image: true,
+            username: true,
+            title: true,
+          },
+        },
+      },
     })
   }
 
@@ -53,7 +48,10 @@ export class ProductsService {
   }
 
   async update(values: any) {
-    return await db.update(productsTable).set(values).where(eq(productsTable.id, values.id))
+    return await db
+      .update(productsTable)
+      .set(values)
+      .where(eq(productsTable.id, values.id))
   }
 
   async delete(id: string) {
@@ -61,7 +59,10 @@ export class ProductsService {
   }
 
   async incrementView(id: string) {
-    return await db.update(productsTable).set({ view: sql`${productsTable.view} + 1` }).where(eq(productsTable.id, id))
+    return await db
+      .update(productsTable)
+      .set({ view: sql`${productsTable.view} + 1` })
+      .where(eq(productsTable.id, id))
   }
 
   async getMoreById(id: string, userId: string) {
@@ -75,12 +76,15 @@ export class ProductsService {
 
   async search(query: string) {
     return await db.query.productsTable.findMany({
-      where: or(ilike(productsTable.title, `%${query}%`), arrayContains(productsTable.tags, [query])),
+      where: or(
+        ilike(productsTable.title, `%${query}%`),
+        arrayContains(productsTable.tags, [query])
+      ),
       with: {
         user: {
-          columns: { id: true, name: true, image: true, username: true }
-        }
-      }
+          columns: { id: true, name: true, image: true, username: true },
+        },
+      },
     })
   }
 }

@@ -2,7 +2,7 @@ import { siteConfig } from '@/config/site'
 
 export const Hero = () => {
   return (
-    <div className="relative flex flex-col items-center justify-center px-4 py-12 md:py-24">
+    <div className="relative flex flex-col items-center justify-center px-4 py-12 md:pt-24">
       <h1 className="motion-preset-fade-sm text-center font-black text-3xl/tight tracking-tight md:text-5xl/tight">
         {siteConfig.hero.title}
       </h1>

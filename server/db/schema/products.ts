@@ -6,6 +6,7 @@ import {
   timestamp,
   varchar
 } from 'drizzle-orm/pg-core';
+import { categoriesTable } from './categories';
 import { usersTable } from './users';
 
 export const productsTable = pgTable('products', {
@@ -18,11 +19,16 @@ export const productsTable = pgTable('products', {
   updatedAt: timestamp('updated_at'),
   view: integer('view').default(0).notNull(),
   userId: varchar('userId').notNull().references(() => usersTable.id, { onDelete: 'cascade' }),
+  categoryId: varchar('categoryId').references(() => categoriesTable.id),
 });
 
 export const productsRelations = relations(productsTable, ({ one, many }) => ({
   user: one(usersTable, {
     fields: [productsTable.userId],
     references: [usersTable.id],
+  }),
+  category: one(categoriesTable, {
+    fields: [productsTable.categoryId],
+    references: [categoriesTable.id],
   }),
 }));

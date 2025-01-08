@@ -42,6 +42,11 @@ export const Product = ({ userId, product, isLoggedIn }: Props) => {
         </div>
       </div>
       <ProductImage src={product.image} alt={product.title} />
+      {!!product.categoryId && (
+        <Badge variant={'secondary'} className="w-fit">
+          {product.category.name}
+        </Badge>
+      )}
       <h2 className="font-bold text-base md:text-2xl">Description</h2>
       <div
         className="text-foreground/85 text-xs/6 md:text-base/7 [&_a]:font-bold [&_a]:text-primary [&_a]:underline [&_a]:decoration-wavy-offset-4 [&_a]:decoration-wavy [&_a]:underline-offset-4"
@@ -51,13 +56,16 @@ export const Product = ({ userId, product, isLoggedIn }: Props) => {
         Published {fromNow(product.createdAt)}
       </p>
       {!!product.tags.length && (
-        <div className="inline-flex flex-wrap items-center gap-1">
-          {product.tags.map((tag) => (
-            <Link key={tag} href={`/search?q=${tag}`}>
-              <Badge variant={'secondary'}>{tag}</Badge>
-            </Link>
-          ))}
-        </div>
+        <>
+          <h2 className="font-semibold text-sm">Tags</h2>
+          <div className="inline-flex flex-wrap items-center gap-1">
+            {product.tags.map((tag) => (
+              <Link key={tag} href={`/search?q=${tag}`}>
+                <Badge variant={'secondary'}>{tag}</Badge>
+              </Link>
+            ))}
+          </div>
+        </>
       )}
       <div className="mt-8 text-center">
         <div className="relative flex items-center justify-center">
