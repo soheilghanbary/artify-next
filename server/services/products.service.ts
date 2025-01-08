@@ -85,6 +85,6 @@ export class ProductsService {
   }
 
   async save(productId: string, collectionId: string) {
-    return await db.update(productsTable).set({ collectionId }).where(eq(productsTable.id, productId)).execute()
+    return await db.update(productsTable).set({ collectionId: collectionId || null }).where(eq(productsTable.id, productId)).execute()
   }
 }

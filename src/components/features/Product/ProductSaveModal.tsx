@@ -46,7 +46,7 @@ export const ProductSaveModal = ({
   initialCollectionId,
   userId,
 }: Props) => {
-  const [_, mutate] = useTransition()
+  const [pending, mutate] = useTransition()
   const [open, setOpen] = useState(false)
   const isDesktop = useMediaQuery('(min-width: 768px)')
   const { data: collections, isPending } = useQuery({
@@ -103,6 +103,17 @@ export const ProductSaveModal = ({
               </div>
             )}
           </div>
+        )}
+        {initialCollectionId && (
+          <button
+            type="button"
+            disabled={pending}
+            onClick={() => onSubmit('')}
+            className="flex items-center gap-2 p-2 text-rose-500 text-xs transition-all hover:text-rose-700"
+          >
+            {/* {pending && <LoadingIcon className="size-3 fill-current" />} */}
+            Remove
+          </button>
         )}
       </DialogContent>
     </Dialog>
