@@ -7,6 +7,7 @@ import {
   Search01Icon,
   User01Icon,
 } from '@/components/icons'
+import { BadgePlus } from 'lucide-react'
 import { NavigationLink } from './NavigationLink'
 
 type Props = {
@@ -19,7 +20,10 @@ export const NavigationBar = ({ isSigned }: Props) => {
       <NavigationLink icon={Home01Icon} label="Home" href="/" />
       <NavigationLink icon={Search01Icon} label="Search" href="/search" />
       {isSigned ? (
-        <NavigationLink icon={User01Icon} label="Profile" href="/profile" />
+        <>
+          <NavigationLink icon={BadgePlus} label="New" href="/new" />
+          <NavigationLink icon={User01Icon} label="Profile" href="/profile" />
+        </>
       ) : (
         <AuthModal
           initialTrigger={
@@ -33,7 +37,6 @@ export const NavigationBar = ({ isSigned }: Props) => {
           }
         />
       )}
-      <NavigationLink icon={PuzzleIcon} label="About" href="/about" />
     </nav>
   )
 }

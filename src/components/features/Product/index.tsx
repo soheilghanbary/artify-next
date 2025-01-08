@@ -1,11 +1,9 @@
 import { ProductImage } from '@/components/features/Product/ProductImage'
-import { ProductLikeButton } from '@/components/features/Product/ProductLikeButton'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { fromNow } from '@/lib/utils'
 import Link from 'next/link'
 import { ProductCopyButton } from './ProductCopyButton'
-import { ProductSaveModal } from './ProductSaveModal'
 
 type Props = {
   product: ProductProps
@@ -39,16 +37,6 @@ export const Product = ({ userId, product, isLoggedIn }: Props) => {
           name={product.user.name}
         />
         <div className="flex flex-1 items-center justify-end gap-2">
-          {isLoggedIn && (
-            <>
-              {/* <ProductLikeButton id={product.id} /> */}
-              <ProductSaveModal
-                id={product.id}
-                userId={userId}
-                initialCollectionId={product.collectionId!}
-              />
-            </>
-          )}
           <ProductCopyButton />
         </div>
       </div>
