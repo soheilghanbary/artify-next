@@ -1,4 +1,4 @@
-import { and, desc, eq, ilike, ne, or, sql } from "drizzle-orm"
+import { and, arrayContains, desc, eq, ilike, ne, or, sql } from "drizzle-orm"
 import { db } from "../db"
 import { productsTable } from "../db/schema"
 
@@ -75,16 +75,12 @@ export class ProductsService {
 
   async search(query: string) {
     return await db.query.productsTable.findMany({
-      where: or(ilike(productsTable.title, `%${query}%`), ilike(productsTable.description, `%${query}%`)),
+      where: or(ilike(productsTable.title, `%${query}%`), arrayContains(productsTable.tags, [query])),
       with: {
         user: {
           columns: { id: true, name: true, image: true, username: true }
         }
       }
     })
-  }
-
-  async save(productId: string, collectionId: string) {
-    return await db.update(productsTable).set({ collectionId: collectionId || null }).where(eq(productsTable.id, productId)).execute()
   }
 }

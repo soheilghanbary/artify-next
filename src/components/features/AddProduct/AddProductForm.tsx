@@ -4,13 +4,15 @@ import { Tiptap } from '@/components/common/tiptap'
 import { LoadingIcon } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
+import { TagsInput } from '@/components/ui/tags-input'
 import { zodResolver } from '@hookform/resolvers/zod'
-import Cookies from 'js-cookie'
-import { useEffect, useTransition } from 'react'
+import type { Tag } from 'emblor'
+import { useState, useTransition } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
-import { z } from 'zod'
+import { array, z } from 'zod'
 import { AddProductImage } from './AddProductImage'
+import { AddProductTags } from './AddProductTags'
 
 type Props = {
   userId: string
@@ -22,6 +24,7 @@ const schema = z.object({
   title: z.string().min(3, 'Title must be at least 3 characters'),
   image: z.string().min(1, 'Image is required'),
   description: z.string().min(3, 'Description must be at least 3 characters'),
+  tags: array(z.string()),
   userId: z.string().min(10, 'User ID is required'),
 })
 
@@ -34,6 +37,7 @@ const createProduct = async (data: any) => {
 }
 
 export const AddProductForm = ({ userId }: Props) => {
+  const [tags, setTags] = useState<Tag[]>([])
   const [pending, startTransition] = useTransition()
   const {
     register,
@@ -47,6 +51,7 @@ export const AddProductForm = ({ userId }: Props) => {
       title: '',
       image: '',
       description: '',
+      tags: [],
       userId,
     },
   })
@@ -98,6 +103,20 @@ export const AddProductForm = ({ userId }: Props) => {
             {errors.description.message}
           </span>
         )}
+      </div>
+      <div className="grid gap-2">
+        <Label>Tags</Label>
+        <Controller
+          name="tags"
+          control={control}
+          render={({ field }) => (
+            <TagsInput
+              value={field.value}
+              onValueChange={field.onChange}
+              placeholder="Enter your tags"
+            />
+          )}
+        />
       </div>
       <Button
         type="submit"

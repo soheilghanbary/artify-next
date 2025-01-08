@@ -6,6 +6,7 @@ type ProductProps = {
   collectionId?: string;
   createdAt: Date
   updatedAt: Date
+  tags: string[]
   user: {
     id: string
     image: string

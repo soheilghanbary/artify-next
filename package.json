@@ -37,6 +37,7 @@
     "date-fns": "^4.1.0",
     "dotenv": "^16.4.7",
     "drizzle-orm": "^0.38.3",
+    "emblor": "^1.4.7",
     "hono": "^4.6.16",
     "js-cookie": "^3.0.5",
     "lottie-react": "^2.4.0",

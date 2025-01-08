@@ -13,6 +13,7 @@ export const productsTable = pgTable('products', {
   title: text('title').notNull(),
   description: text('description').notNull(),
   image: text('image').notNull(),
+  tags: text('tags').array().default([]).notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at'),
   view: integer('view').default(0).notNull(),

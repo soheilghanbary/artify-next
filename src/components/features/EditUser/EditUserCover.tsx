@@ -1,7 +1,6 @@
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useUpload } from '@/hooks/useUpload'
-import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 
 type Props = {
@@ -23,7 +22,9 @@ export const EditUserCover = ({ initialImage, onChange }: Props) => {
   })
   return (
     <div className="col-span-2 grid gap-2">
-      <Label>Cover</Label>
+      <Label>
+        Cover <span className="text-muted-foreground text-xs">(1200x280)</span>
+      </Label>
       <Input
         type="text"
         placeholder="Upload a cover"

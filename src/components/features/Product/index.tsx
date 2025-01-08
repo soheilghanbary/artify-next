@@ -1,4 +1,5 @@
 import { ProductImage } from '@/components/features/Product/ProductImage'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { fromNow } from '@/lib/utils'
@@ -49,6 +50,15 @@ export const Product = ({ userId, product, isLoggedIn }: Props) => {
       <p className="text-foreground/85 text-xs/5">
         Published {fromNow(product.createdAt)}
       </p>
+      {product.tags.length && (
+        <div className="inline-flex flex-wrap items-center gap-1">
+          {product.tags.map((tag) => (
+            <Link key={tag} href={`/search?q=${tag}`}>
+              <Badge variant={'secondary'}>{tag}</Badge>
+            </Link>
+          ))}
+        </div>
+      )}
       <div className="mt-8 text-center">
         <div className="relative flex items-center justify-center">
           <Separator className="absolute w-full" />
