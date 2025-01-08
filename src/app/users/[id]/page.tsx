@@ -19,11 +19,10 @@ export default async ({ params }: Props) => {
       <div className="-z-10 relative mx-auto flex aspect-[12/3] items-end justify-center rounded-3xl bg-muted/40">
         <Image
           fill
-          quality={100}
-          sizes="100px"
+          sizes="400px"
           alt="cover"
           className="aspect-[inherit] size-full rounded-[inherit] object-cover"
-          src="/images/cover.png"
+          src={user.cover}
         />
       </div>
       <div className="-mt-14 z-10 flex flex-col items-center gap-1 text-center">

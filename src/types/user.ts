@@ -3,6 +3,7 @@ interface User {
   name: string
   email: string
   image: string
+  cover: string
   emailVerified: string | null
   createdAt: Date
   title: string

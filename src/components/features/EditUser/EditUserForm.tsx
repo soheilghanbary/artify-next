@@ -11,11 +11,13 @@ import toast from 'react-hot-toast'
 import { z } from 'zod'
 import { EditUserImage } from './EditUserImage'
 import { updateUser } from '@/services/user.service'
+import { EditUserCover } from './EditUserCover'
 
 const schema = z.object({
   image: z.string(),
   name: z.string().min(2),
   title: z.string().min(2),
+  cover: z.string(),
   bio: z.string().min(2),
   portfolio: z.string().optional(),
   instagram: z.string().optional(),
@@ -64,17 +66,14 @@ export const EditUserForm = (defaultValues: Schema & { id: string }) => {
         error={errors.title?.message}
         {...register('title')}
       />
+      <EditUserCover
+        initialImage={watch('cover')}
+        onChange={(e) => setValue('cover', e)}
+      />
       <div className="col-span-2 grid gap-2 [&_label]:text-sm">
         <Label>Biography</Label>
         <Tiptap value={watch('bio')} onChange={(e) => setValue('bio', e)} />
       </div>
-      {/* <TextFieldArea
-        rows={6}
-        label="Biography"
-        className="col-span-2"
-        error={errors.bio?.message}
-        {...register('bio')}
-      /> */}
       <TextField
         label="Portfolio URL"
         className="col-span-2"

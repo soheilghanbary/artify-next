@@ -3,7 +3,7 @@ import { client } from "@/lib/api"
 const getUserById = async (id: string) => {
   try {
     const res = await client.get(`/users/${id}`)
-    return res.data
+    return res.data as User
   } catch (error) {
     return null
   }

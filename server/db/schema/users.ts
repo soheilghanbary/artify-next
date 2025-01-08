@@ -15,6 +15,7 @@ export const usersTable = pgTable(
     name: text('name').default(''),
     email: text('email').notNull().unique(),
     image: text('image').default('/images/placeholder.png'),
+    cover: text('cover').default('/images/cover.png'),
     username: text('username').default(''),
     createdAt: timestamp('created_at').defaultNow(),
     updatedAt: timestamp('updated_at').defaultNow().$onUpdateFn(() => new Date()),
