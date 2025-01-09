@@ -14,7 +14,7 @@ type Props = {
   onValueChange: (value: string) => void
 }
 
-export const AddProductCategory = ({ value, onValueChange }: Props) => {
+export const SelectCategory = ({ value, onValueChange }: Props) => {
   const { data, isPending } = useQuery({
     queryKey: ['categories'],
     queryFn: getAllCategories,

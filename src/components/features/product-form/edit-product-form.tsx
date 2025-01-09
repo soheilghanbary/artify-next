@@ -11,7 +11,7 @@ import { useTransition } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { array, z } from 'zod'
-import { AddProductCategory } from './add-product-category'
+import { SelectCategory } from './select-category'
 import { UploadProductImage } from './upload-product-image'
 
 type Schema = z.infer<typeof schema>
@@ -97,7 +97,7 @@ export const EditProductForm = ({ id, defaultValues }: Props) => {
           name="categoryId"
           control={control}
           render={({ field }) => (
-            <AddProductCategory
+            <SelectCategory
               value={field.value}
               onValueChange={field.onChange}
             />

@@ -62,9 +62,10 @@
 @layer base {
   * {
     @apply border-border outline-none scroll-smooth;
+    -webkit-tap-highlight-color: transparent;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overscroll-contain;
   }
 }
 
@@ -78,6 +79,40 @@
 
 body::-webkit-scrollbar {
   display: none;
+}
+
+.text-editor {
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  overflow-wrap: break-word;
+  @apply px-4 py-2;
+
+  * {
+    @apply mb-2;
+  }
+
+  h2 {
+    @apply font-bold text-lg/relaxed;
+  }
+  p {
+    @apply text-xs/5 last:mb-0 lg:text-sm/7;
+  }
+
+  ul {
+    @apply list-disc pl-4;
+  }
+
+  img {
+    @apply my-2 mx-auto;
+    &.ProseMirror-selectednode {
+      @apply ring-2 ring-primary ring-offset-2 ring-offset-background;
+    }
+  }
+
+  a {
+    @apply text-primary underline decoration-wavy underline-offset-4;
+  }
 }
 
 ::selection {
