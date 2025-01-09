@@ -8,8 +8,12 @@ export const commentsTable = pgTable('comments', {
     .primaryKey()
     .default(sql`gen_random_uuid()`)
     .notNull(),
-  userId: varchar('userId', { length: 36 }).notNull(),
-  productId: varchar('productId', { length: 36 }).notNull(),
+  userId: varchar('userId')
+    .notNull()
+    .references(() => usersTable.id, { onDelete: 'cascade' }),
+  productId: varchar('productId')
+    .notNull()
+    .references(() => productsTable.id, { onDelete: 'cascade' }),
   text: text('text').notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),

@@ -5,15 +5,19 @@ import {
   ProductAuthorCenter,
   ProductContent,
   ProductCopy,
+  ProductDelete,
   ProductImage,
   ProductIncrementView,
   ProductLike,
   ProductMore,
 } from '@/components/features/product'
+import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { auth } from '@/server/lib/auth'
 import { getProductById } from '@/services/products.service'
+import { param } from 'drizzle-orm'
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 type Props = {
@@ -90,10 +94,20 @@ export default async function ProductDetailPage({ params }: Props) {
         description={product.description}
         category={product.category}
       />
+      {product.user.id === session?.user?.id && (
+        <div className="mx-auto flex w-fit items-center justify-center gap-4 rounded-md bg-muted/40 p-4">
+          <Button asChild variant={'link'} className="text-foreground">
+            <Link href={`/products/${product.id}/edit`}>Edit</Link>
+          </Button>
+          <Separator orientation="vertical" className="h-3.5" />
+          <ProductDelete id={id} />
+        </div>
+      )}
       <ProductAuthorCenter
         userId={product.user.id}
         image={product.user.image}
         name={product.user.name}
+        title={product.user.title}
       />
       <ProductMore
         userId={userId}

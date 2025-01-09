@@ -26,19 +26,18 @@ export const getMoreProducts = async (productId: string, userId: string) => {
 }
 
 export const createProduct = async (data: any) => {
-  const res = await fetch('/api/products', {
-    method: 'POST',
-    body: JSON.stringify(data),
-  })
-  return res.json()
+  const res = await client.post('/products', data)
+  return res.data
 }
 
 export const updateProduct = async (id: string, data: any) => {
-  const res = await fetch(`/api/products/${id}`, {
-    method: 'PUT',
-    body: JSON.stringify(data),
-  })
-  return res.json()
+  const res = await client.put(`/api/products/${id}`, data)
+  return res.data
+}
+
+export const deleteProduct = async (id: string) => {
+  const res = await client.delete(`/products/${id}`)
+  return res.data
 }
 
 export const incrementViewProduct = async (productId: string) => {
