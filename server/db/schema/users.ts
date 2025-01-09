@@ -8,6 +8,7 @@ import {
 } from 'drizzle-orm/pg-core'
 import { likesTable } from './likes'
 import { productsTable } from './products'
+import { commentsTable } from './comments'
 
 export const usersTable = pgTable(
   'users',
@@ -44,4 +45,5 @@ export const usersTable = pgTable(
 export const usersRelations = relations(usersTable, ({ many }) => ({
   products: many(productsTable),
   likes: many(likesTable),
+  comments: many(commentsTable),
 }))

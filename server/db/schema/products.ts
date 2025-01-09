@@ -1,6 +1,7 @@
 import { relations, sql } from 'drizzle-orm'
 import { integer, pgTable, text, timestamp, varchar } from 'drizzle-orm/pg-core'
 import { categoriesTable } from './categories'
+import { commentsTable } from './comments'
 import { likesTable } from './likes'
 import { usersTable } from './users'
 
@@ -32,4 +33,5 @@ export const productsRelations = relations(productsTable, ({ one, many }) => ({
     references: [categoriesTable.id],
   }),
   likes: many(likesTable),
+  comments: many(commentsTable),
 }))
