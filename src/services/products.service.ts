@@ -31,7 +31,7 @@ export const createProduct = async (data: any) => {
 }
 
 export const updateProduct = async (id: string, data: any) => {
-  const res = await client.put(`/api/products/${id}`, data)
+  const res = await client.put(`/products/${id}`, data)
   return res.data
 }
 
