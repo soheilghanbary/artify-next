@@ -17,29 +17,32 @@ export function ProductLike({ productId, userId, hasLiked }: Props) {
 
   const onSubmit = () => {
     mutate(async () => {
-      await toggleLike(productId, userId)
-      setLiked(!hasLiked)
+      const res = await toggleLike(productId, userId)
+      setLiked(res.liked)
     })
   }
 
   return (
-    <Button
-      size={'icon'}
-      variant={'outline'}
-      onClick={onSubmit}
-      disabled={pending}
-      className={pending ? 'opacity-50' : ''}
-    >
-      {pending ? (
-        <LoadingIcon className="fill-rose-500" />
-      ) : (
-        <FavouriteIcon
-          className={cn(
-            'motion-preset-expand text-rose-500',
-            hasLiked && 'motion-preset-expand fill-rose-500'
-          )}
-        />
-      )}
-    </Button>
+    <>
+      {hasLiked.toString()}
+      <Button
+        size={'icon'}
+        variant={'outline'}
+        onClick={onSubmit}
+        disabled={pending}
+        className={pending ? 'opacity-50' : ''}
+      >
+        {pending ? (
+          <LoadingIcon className="fill-rose-500" />
+        ) : (
+          <FavouriteIcon
+            className={cn(
+              'motion-preset-expand text-rose-500',
+              liked && 'motion-preset-expand fill-rose-500'
+            )}
+          />
+        )}
+      </Button>
+    </>
   )
 }
