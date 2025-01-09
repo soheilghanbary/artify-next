@@ -1,10 +1,9 @@
 import { AuthModal } from '@/components/features/AuthModal'
-import { User01Icon } from '@/components/icons'
+import { AddCircleHalfDotIcon, User01Icon } from '@/components/icons'
 import { Button, buttonVariants } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
 import { auth } from '@/server/lib/auth'
-import { BadgePlus } from 'lucide-react'
 import Link from 'next/link'
 
 export const CheckAuthSkeleton = () => (
@@ -17,7 +16,7 @@ export const CheckAuthSkeleton = () => (
 const NewProductButton = () => (
   <Button asChild variant={'default'} fullRounded>
     <Link href={'/new'}>
-      <BadgePlus />
+      <AddCircleHalfDotIcon />
       Share Work
     </Link>
   </Button>

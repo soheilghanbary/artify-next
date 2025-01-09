@@ -1,13 +1,13 @@
 'use client'
 import { AuthModal } from '@/components/features/AuthModal'
 import {
+  AddCircleHalfDotIcon,
   Home01Icon,
   Login03Icon,
   Search01Icon,
   User01Icon,
 } from '@/components/icons'
 import { cn } from '@/lib/utils'
-import { BadgePlus } from 'lucide-react'
 import { NavigationLink } from './NavigationLink'
 
 type Props = {
@@ -26,7 +26,7 @@ export const NavigationBar = ({ isSigned }: Props) => {
       <NavigationLink icon={Search01Icon} label="Search" href="/search" />
       {isSigned ? (
         <>
-          <NavigationLink icon={BadgePlus} label="New" href="/new" />
+          <NavigationLink icon={AddCircleHalfDotIcon} label="New" href="/new" />
           <NavigationLink icon={User01Icon} label="Profile" href="/profile" />
         </>
       ) : (

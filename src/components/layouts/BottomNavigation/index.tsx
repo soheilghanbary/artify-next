@@ -1,4 +1,3 @@
-import { getToken } from '@/helpers/token'
 import { auth } from '@/server/lib/auth'
 import { NavigationBar } from './NavigationBar'
 
