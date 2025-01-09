@@ -4,7 +4,7 @@ import { useRef, useState } from 'react'
 import { Search01Icon } from '../icons'
 import { Input } from '../ui/input'
 
-export const SearchBox = () => {
+export const SearchField = () => {
   const inputRef = useRef<HTMLInputElement>(null)
   const [query, setQuery] = useQueryState('q')
   const [text, setText] = useState(query || '')

@@ -1,6 +1,6 @@
 'use client'
 import { SearchProductList } from '@/components/features/ProductList'
-import { SearchBox } from '@/components/features/SearchBox'
+import { SearchField } from '@/components/features/search-field'
 import { useQueryState } from 'nuqs'
 import { Suspense } from 'react'
 
@@ -24,7 +24,7 @@ const Hero = () => {
       <h1 className="motion-preset-fade-sm text-center font-black text-3xl/tight tracking-tight md:text-5xl/tight">
         Search any Products
       </h1>
-      <SearchBox />
+      <SearchField />
     </div>
   )
 }

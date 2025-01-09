@@ -1,4 +1,4 @@
-import { AddProductForm } from '@/components/features/AddProduct/AddProductForm'
+import { AddProductForm } from '@/components/features/add-product/add-product-form'
 import { auth } from '@/server/lib/auth'
 
 export default async function NewProduct() {

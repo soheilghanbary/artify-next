@@ -10,8 +10,8 @@ import { useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { z } from 'zod'
-import { EditUserCover } from './EditUserCover'
-import { EditUserImage } from './EditUserImage'
+import { EditUserCover } from './edit-user-cover'
+import { EditUserImage } from './edit-user-image'
 
 const schema = z.object({
   image: z.string(),

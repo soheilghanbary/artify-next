@@ -10,8 +10,8 @@ import { useTransition } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { array, z } from 'zod'
-import { AddProductCategory } from './AddProductCategory'
-import { AddProductImage } from './AddProductImage'
+import { AddProductCategory } from './add-product-category'
+import { AddProductImage } from './add-product-image'
 
 type Props = {
   userId: string

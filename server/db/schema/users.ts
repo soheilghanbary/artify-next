@@ -6,9 +6,9 @@ import {
   uniqueIndex,
   varchar,
 } from 'drizzle-orm/pg-core'
+import { commentsTable } from './comments'
 import { likesTable } from './likes'
 import { productsTable } from './products'
-import { commentsTable } from './comments'
 
 export const usersTable = pgTable(
   'users',

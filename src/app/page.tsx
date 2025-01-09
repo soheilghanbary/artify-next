@@ -1,6 +1,6 @@
-import { Hero } from '@/components/features/Hero'
-import { ProductList } from '@/components/features/product-list'
 import { ProductsLoader } from '@/components/features/ProductList/ProductListLoader'
+import { Hero } from '@/components/features/hero'
+import { ProductList } from '@/components/features/product-list'
 import { getAllProducts } from '@/services/products.service'
 import { Suspense } from 'react'
 

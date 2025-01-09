@@ -1,5 +1,5 @@
 import { BackButton } from '@/components/common/back-button'
-import { EditUserForm } from '@/components/features/EditUser/EditUserForm'
+import { EditUserForm } from '@/components/features/edit-user/edit-user-form'
 import { auth } from '@/server/lib/auth'
 import { getUserById } from '@/services/user.service'
 
