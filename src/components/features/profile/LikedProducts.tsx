@@ -1,5 +1,5 @@
 import { getLikedProducts } from '@/services/likes.service'
-import { ProductList } from '../ProductList/ProductList'
+import { ProductList } from '../product-list'
 
 type Props = {
   id: string

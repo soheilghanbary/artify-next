@@ -12,8 +12,8 @@ import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
 import { useQueryState } from 'nuqs'
 import { useEffect, useRef } from 'react'
-import { ProductList } from './ProductList'
 import { ProductsLoader } from './ProductListLoader'
+import { ProductList } from '../product-list'
 
 export const AllProducts = () => {
   const { data, isPending } = useAllProducts()

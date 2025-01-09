@@ -1,5 +1,4 @@
 export { ProductAuthor, ProductAuthorCenter } from './product-author'
-export { ProductComments } from './product-comments'
 export { ProductContent } from './product-content'
 export { ProductCopy } from './product-copy'
 export { ProductImage } from './product-image'

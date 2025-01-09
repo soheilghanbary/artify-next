@@ -1,7 +1,7 @@
 import { getMoreProducts } from '@/services/products.service'
 import { Suspense } from 'react'
-import { ProductList } from '../ProductList/ProductList'
 import { ProductsLoader } from '../ProductList/ProductListLoader'
+import { ProductList } from '../product-list'
 
 interface Props {
   name: string

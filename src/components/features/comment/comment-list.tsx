@@ -11,11 +11,11 @@ type Props = {
 
 const CommentItem = (c: Comment) => {
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-3">
       <img
         src={c.user.image}
         alt={c.user.name}
-        className="size-10 rounded-full object-cover"
+        className="size-8 rounded-full object-cover"
       />
       <div className="flex-1">
         <div className="flex items-center gap-2">
@@ -31,18 +31,17 @@ const CommentItem = (c: Comment) => {
   )
 }
 
-export const ProductComments = ({ id }: Props) => {
+export const CommentList = ({ id }: Props) => {
   const { data, isPending } = useQuery({
     queryKey: ['comments', id],
     queryFn: () => getComments(id),
   })
 
   if (isPending) return <LoadingIcon className="mx-auto my-6 size-7" />
-
   if (!data) return <p>comments not found</p>
 
   return (
-    <div className="grid gap-4">
+    <div className="mt-2 grid gap-4">
       {data.map((c) => (
         <CommentItem key={c.id} {...c} />
       ))}

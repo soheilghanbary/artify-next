@@ -1,9 +1,8 @@
 import { BackButton } from '@/components/common/back-button'
-import { AddComment } from '@/components/features/Product/AddComment'
+import { AddComment, CommentList } from '@/components/features/comment'
 import {
   ProductAuthor,
   ProductAuthorCenter,
-  ProductComments,
   ProductContent,
   ProductCopy,
   ProductImage,
@@ -105,7 +104,7 @@ export default async function ProductDetailPage({ params }: Props) {
       <div className="grid gap-4">
         <h2 className="font-medium">FeedBack</h2>
         {!!session && <AddComment productId={id} userId={session?.user?.id!} />}
-        <ProductComments id={id} />
+        <CommentList id={id} />
       </div>
       <ProductIncrementView />
     </div>
