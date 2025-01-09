@@ -257,9 +257,9 @@ export const TagsInput = React.forwardRef<HTMLDivElement, TagsInputProps>(
           ref={ref}
           dir={dir}
           className={cn(
-            'flex flex-wrap items-center gap-1 overflow-hidden rounded-md bg-background p-2 ring-1 ring-muted ',
+            'flex flex-wrap items-center gap-1 overflow-hidden rounded-md border bg-background p-2 ring-ring ring-offset-2 ring-offset-background',
             {
-              'focus-within:ring-ring': activeIndex === -1,
+              'focus-within:ring-2': activeIndex === -1,
             },
             className
           )}
