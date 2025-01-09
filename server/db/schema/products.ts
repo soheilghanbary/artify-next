@@ -15,7 +15,7 @@ export const productsTable = pgTable('products', {
   image: text('image').notNull(),
   tags: text('tags').array().default([]).notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at'),
+  updatedAt: timestamp('updated_at').notNull(),
   view: integer('view').default(0).notNull(),
   userId: varchar('userId')
     .notNull()
