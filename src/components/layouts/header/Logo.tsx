@@ -3,10 +3,7 @@ import Link from 'next/link'
 
 export const Logo = () => {
   return (
-    <Link
-      href={'/'}
-      className="flex cursor-pointer items-center gap-1 text-primary"
-    >
+    <Link href={'/'} className="flex cursor-pointer items-center text-primary">
       <LogoBrand className="fill-primary" />
     </Link>
   )
