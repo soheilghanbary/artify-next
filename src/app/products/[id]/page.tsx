@@ -64,7 +64,7 @@ export default async function ProductDetailPage({ params }: Props) {
       <Separator />
       <div className="grid gap-4">
         <h2 className="font-medium">FeedBack</h2>
-        <AddComment productId={id} userId={session?.user?.id!} />
+        {!!session && <AddComment productId={id} userId={session?.user?.id!} />}
         <ProductComments id={id} />
       </div>
       <ProductIncrementView />
