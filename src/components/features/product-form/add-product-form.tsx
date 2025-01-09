@@ -5,16 +5,19 @@ import { LoadingIcon } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { TagsInput } from '@/components/ui/tags-input'
+import { createProduct, updateProduct } from '@/services/products.service'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTransition } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { array, z } from 'zod'
 import { AddProductCategory } from './add-product-category'
-import { AddProductImage } from './add-product-image'
+import { UploadProductImage } from './upload-product-image'
 
 type Props = {
   userId: string
+  type: 'add' | 'edit'
+  product?: Schema & { id: string }
 }
 
 type Schema = z.infer<typeof schema>
@@ -28,15 +31,7 @@ const schema = z.object({
   userId: z.string().min(10, 'User ID is required'),
 })
 
-const createProduct = async (data: any) => {
-  const res = await fetch('/api/products', {
-    method: 'POST',
-    body: JSON.stringify(data),
-  })
-  return res.json()
-}
-
-export const AddProductForm = ({ userId }: Props) => {
+export const AddProductForm = ({ userId, type, product }: Props) => {
   const [pending, startTransition] = useTransition()
   const {
     register,
@@ -47,19 +42,24 @@ export const AddProductForm = ({ userId }: Props) => {
   } = useForm<Schema>({
     resolver: zodResolver(schema),
     defaultValues: {
-      title: '',
-      image: '',
-      description: '',
-      categoryId: '',
-      tags: [],
+      title: product?.title || '',
+      image: product?.image || '',
+      description: product?.description || '',
+      categoryId: product?.categoryId || '',
+      tags: product?.tags || [],
       userId,
     },
   })
 
   const onSubmit = handleSubmit(async (data) => {
     startTransition(async () => {
-      const res = await createProduct(data)
-      toast.success(res.message)
+      if (type === 'add') {
+        const res = await createProduct(data)
+        toast.success(res.message)
+      } else if (type === 'edit' && product) {
+        const res = await updateProduct(product.id, data)
+        toast.success(res.message)
+      }
     })
   })
 
@@ -75,7 +75,7 @@ export const AddProductForm = ({ userId }: Props) => {
           name="image"
           control={control}
           render={({ field }) => (
-            <AddProductImage
+            <UploadProductImage
               onUploaded={(image) => {
                 field.onChange(image) // Update the form state
                 setValue('image', image) // Optional: Directly set the value
@@ -143,7 +143,7 @@ export const AddProductForm = ({ userId }: Props) => {
         className="w-fit"
       >
         {pending && <LoadingIcon className="fill-current" />}
-        Save Product
+        {type === 'add' ? 'Save Product' : 'Update Product'}
       </Button>
     </form>
   )

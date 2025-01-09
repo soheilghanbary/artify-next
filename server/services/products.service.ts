@@ -48,11 +48,11 @@ export class ProductsService {
     return await db.insert(productsTable).values(values)
   }
 
-  async update(values: any) {
+  async update(id: string, values: any) {
     return await db
       .update(productsTable)
       .set(values)
-      .where(eq(productsTable.id, values.id))
+      .where(eq(productsTable.id, id))
   }
 
   async delete(id: string) {

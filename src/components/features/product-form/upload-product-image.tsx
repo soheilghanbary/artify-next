@@ -5,11 +5,12 @@ import Image from 'next/image'
 import { useDropzone } from 'react-dropzone'
 
 type Props = {
+  initialImage?: string
   onUploaded: (image: string) => void
 }
 
-export const AddProductImage = ({ onUploaded }: Props) => {
-  const { path, onDrop, loading } = useUpload('', onUploaded)
+export const UploadProductImage = ({ initialImage, onUploaded }: Props) => {
+  const { path, onDrop, loading } = useUpload(initialImage || '', onUploaded)
 
   // Dropzone configuration
   const { getRootProps, getInputProps } = useDropzone({

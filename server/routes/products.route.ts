@@ -26,10 +26,9 @@ export const productsRoutes = new Hono()
   })
   .put('/:id', async (c) => {
     const id = c.req.param('id')
-    const userId = ''
     const values = await c.req.json()
-    const product = await productsService.update({ ...values, id, userId })
-    return c.json(product)
+    const product = await productsService.update(id, values)
+    return c.json({ message: 'Product updated successfully' })
   })
   .delete('/:id', async (c) => {
     const id = c.req.param('id')

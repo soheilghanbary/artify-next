@@ -25,15 +25,20 @@ export const getMoreProducts = async (productId: string, userId: string) => {
   return res.data
 }
 
-export const addToCollection = async (
-  productId: string,
-  collectionId: string
-) => {
-  const res = await client.post(`/products/${productId}/save`, {
-    productId,
-    collectionId,
+export const createProduct = async (data: any) => {
+  const res = await fetch('/api/products', {
+    method: 'POST',
+    body: JSON.stringify(data),
   })
-  return res.data
+  return res.json()
+}
+
+export const updateProduct = async (id: string, data: any) => {
+  const res = await fetch(`/api/products/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  })
+  return res.json()
 }
 
 export const incrementViewProduct = async (productId: string) => {
