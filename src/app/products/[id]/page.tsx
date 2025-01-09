@@ -15,7 +15,6 @@ import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { auth } from '@/server/lib/auth'
 import { getProductById } from '@/services/products.service'
-import { param } from 'drizzle-orm'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -110,8 +109,8 @@ export default async function ProductDetailPage({ params }: Props) {
         title={product.user.title}
       />
       <ProductMore
-        userId={userId}
         productId={product.id}
+        userId={product.user.id}
         name={product.user.name}
       />
       <Separator />

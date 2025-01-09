@@ -11,6 +11,10 @@ interface Props {
 
 const MoreProducts = async ({ productId, userId }: Omit<Props, 'name'>) => {
   const products = await getMoreProducts(productId, userId)
+
+  if (products.length === 0)
+    return <p className="text-muted-foreground text-xs">No more products</p>
+
   return <ProductList hideAuthor items={products} />
 }
 
