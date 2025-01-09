@@ -13,8 +13,8 @@ import {
 } from '@/components/features/product'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+import { getProductById } from '@/server/actions/products.action'
 import { auth } from '@/server/lib/auth'
-import { getProductById } from '@/services/products.service'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -28,24 +28,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const product = await getProductById(id)
 
   return {
-    title: product.title,
-    description: product.description,
+    title: product?.title,
+    description: product?.description,
     twitter: {
       card: 'summary_large_image',
-      title: product.title,
-      description: product.description,
-      images: [product.image],
+      title: product?.title,
+      description: product?.description,
+      images: [product?.image!],
     },
     openGraph: {
-      title: product.title,
-      description: product.description,
-      publishedTime: new Date(product.createdAt).toISOString(),
-      modifiedTime: new Date(product.updatedAt).toISOString(),
+      title: product?.title,
+      description: product?.description,
+      publishedTime: new Date(product?.createdAt!).toISOString(),
+      modifiedTime: new Date(product?.updatedAt!).toISOString(),
       url: `https://artify.co/products/${id}`,
       images: [
         {
-          url: product.image,
-          alt: product.title,
+          url: product?.image!,
+          alt: product?.title,
         },
       ],
     },
@@ -91,7 +91,7 @@ export default async function ProductDetailPage({ params }: Props) {
         tags={product.tags}
         createdAt={product.createdAt}
         description={product.description}
-        category={product.category}
+        category={product.category!}
       />
       {product.user.id === session?.user?.id && (
         <div className="mx-auto flex w-fit items-center justify-center gap-4 rounded-md bg-muted/40 p-4">

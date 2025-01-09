@@ -17,16 +17,16 @@ export const usersTable = pgTable(
       .primaryKey()
       .default(sql`gen_random_uuid()`)
       .notNull(),
-    name: text('name').default(''),
+    name: text('name').notNull().default(''),
     email: text('email').notNull().unique(),
-    image: text('image').default('/images/placeholder.png'),
+    image: text('image').notNull().default('/images/placeholder.png'),
     cover: text('cover').default('/images/cover.png'),
     username: text('username').default(''),
     createdAt: timestamp('created_at').defaultNow(),
     updatedAt: timestamp('updated_at')
       .defaultNow()
       .$onUpdateFn(() => new Date()),
-    title: text('title').default('a artify person'),
+    title: text('title').notNull().default('a artify person'),
     bio: text('bio').default('Hello, I am also a member of the Artify family.'),
     portfolio: text('portfolio').default(''),
     instagram: text('instagram').default(''),
