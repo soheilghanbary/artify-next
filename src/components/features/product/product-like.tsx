@@ -16,9 +16,9 @@ export function ProductLike({ productId, userId, hasLiked }: Props) {
   const [pending, mutate] = useTransition()
 
   const onSubmit = () => {
-    setLiked(!liked)
     mutate(async () => {
       await toggleLike(productId, userId)
+      setLiked(!hasLiked)
     })
   }
 
@@ -36,7 +36,7 @@ export function ProductLike({ productId, userId, hasLiked }: Props) {
         <FavouriteIcon
           className={cn(
             'motion-preset-expand text-rose-500',
-            liked && 'motion-preset-expand fill-rose-500'
+            hasLiked && 'motion-preset-expand fill-rose-500'
           )}
         />
       )}
