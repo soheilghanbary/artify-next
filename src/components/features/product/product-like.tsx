@@ -11,7 +11,7 @@ type Props = {
   hasLiked: boolean
 }
 
-export function ProductLikeButton({ productId, userId, hasLiked }: Props) {
+export function ProductLike({ productId, userId, hasLiked }: Props) {
   const [liked, setLiked] = useState(hasLiked)
   const [pending, mutate] = useTransition()
 

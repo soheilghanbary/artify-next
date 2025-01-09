@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { usePathname } from 'next/navigation'
 import toast from 'react-hot-toast'
 
-export const ProductCopyButton = () => {
+export const ProductCopy = () => {
   const pathname = usePathname()
 
   const copy = () => {
