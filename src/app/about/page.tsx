@@ -4,12 +4,10 @@ const Artify: React.FC = () => {
   return (
     <div className="mx-auto max-w-4xl p-6">
       <h1 className="mb-6 font-bold text-4xl text-foreground">About Artify</h1>
-
       <p className="mb-6 text-foreground/75 text-lg">
         Artify is a web application built to showcase creative arts, leveraging
         modern web technologies.
       </p>
-
       <h2 className="mb-4 font-semibold text-2xl text-foreground">Purpose</h2>
       <p className="mb-6 text-foreground/75 text-lg">
         The main goals of this project are:
@@ -24,7 +22,6 @@ const Artify: React.FC = () => {
           performant and scalable application.
         </li>
       </ul>
-
       <h2 className="mb-4 font-semibold text-2xl text-foreground">
         Tech Stack
       </h2>
@@ -81,9 +78,7 @@ const Artify: React.FC = () => {
           </a>
         </li>
       </ul>
-
       <hr className="my-6 border-gray-300" />
-
       <p className="text-foreground/75 text-lg">
         Feel free to explore and adapt the project for your own learning and
         development purposes!
