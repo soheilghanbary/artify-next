@@ -18,8 +18,8 @@ const ProductImage = ({
 }: { id: string; title: string; image: string }) => {
   return (
     <Link
-      prefetch
-      shallow
+      scroll={true}
+      prefetch={false}
       className="relative aspect-[4/3] overflow-hidden rounded-xl border border-border/40"
       href={`/products/${id}`}
     >
@@ -50,6 +50,8 @@ const AuthorAvatar = ({ name, image }: { name: string; image: string }) => (
 const AuthorInfo = ({ user }: { user: ProductProps['user'] }) => (
   <Link
     href={`/users/${user.id}`}
+    scroll={true}
+    prefetch={false}
     className="flex flex-1 items-center gap-2 font-medium text-xs"
   >
     <AuthorAvatar name={user.name} image={user.image} />
