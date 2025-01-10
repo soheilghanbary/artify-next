@@ -28,11 +28,6 @@ const schema = z.object({
   title: z.string().min(2),
   cover: z.string(),
   bio: z.string().min(2),
-  portfolio: z.string().optional(),
-  instagram: z.string().optional(),
-  twitter: z.string().optional(),
-  github: z.string().optional(),
-  linkedin: z.string().optional(),
 })
 
 type Schema = z.infer<typeof schema>
@@ -86,31 +81,6 @@ export const EditUserForm = (defaultValues: Schema & { id: string }) => {
           onChange={(e) => setValue('bio', e)}
         />
       </div>
-      <TextField
-        label="Portfolio URL"
-        className="col-span-2"
-        {...register('portfolio')}
-      />
-      <TextField
-        label="Instagram URL"
-        className="col-span-2"
-        {...register('instagram')}
-      />
-      <TextField
-        label="X (Twitter) URL"
-        className="col-span-2"
-        {...register('twitter')}
-      />
-      <TextField
-        label="GitHub URL"
-        className="col-span-2"
-        {...register('github')}
-      />
-      <TextField
-        label="LinkedIn URL"
-        className="col-span-2"
-        {...register('linkedin')}
-      />
       <Button disabled={pending} className="w-fit">
         {pending ? <LoadingIcon className="fill-current" /> : null}
         Save Profile

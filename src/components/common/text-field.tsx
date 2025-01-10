@@ -16,13 +16,7 @@ export const TextField = forwardRef(function MyInput(
   return (
     <div className={cn('grid gap-2', className)}>
       <Label className="text-xs sm:text-sm">{label}</Label>
-      <Input
-        type="text"
-        autoComplete="off"
-        className="text-xs sm:text-sm"
-        ref={ref}
-        {...rest}
-      />
+      <Input type="text" autoComplete="off" ref={ref} {...rest} />
       {description && (
         <span className="text-muted-foreground text-xs">{description}</span>
       )}

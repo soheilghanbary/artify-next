@@ -42,7 +42,7 @@ export default async () => {
             {user.title}
           </p>
           <Button asChild className="mt-2" variant={'outline'} size={'sm'}>
-            <Link href={'/profile/edit'}>Edit Profile</Link>
+            <Link href={'/settings'}>Settings</Link>
           </Button>
         </div>
       </div>

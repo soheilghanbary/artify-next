@@ -5,6 +5,9 @@ import { auth, signIn, signOut } from '@/server/lib/auth'
 export const onSignIn = async (provider: 'github' | 'google') =>
   await signIn(provider)
 // sign out
-export const onSignOut = async () => await signOut()
+export const onSignOut = async () =>
+  await signOut({
+    redirectTo: '/',
+  })
 // get session
 export const getSession = async () => await auth()
