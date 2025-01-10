@@ -94,7 +94,7 @@ export default async function ProductDetailPage({ params }: Props) {
         category={product.category!}
       />
       {product.user.id === session?.user?.id && (
-        <div className="mx-auto flex w-fit items-center justify-center gap-4 rounded-md bg-muted/40 p-4">
+        <div className="mx-auto flex w-fit items-center justify-center gap-4 rounded-md bg-muted/40 p-2">
           <Button asChild variant={'link'} className="text-foreground">
             <Link href={`/products/${product.id}/edit`}>Edit</Link>
           </Button>
