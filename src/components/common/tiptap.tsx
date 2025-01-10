@@ -194,11 +194,9 @@ export const Tiptap = ({ value, onChange }: Props) => {
 export const TipTapSkeleton = () => (
   <div className="rounded-lg border">
     <div className="flex gap-2 border-b p-2">
-      <Skeleton className="size-8" />
-      <Skeleton className="size-8" />
-      <Skeleton className="size-8" />
-      <Skeleton className="size-8" />
-      <Skeleton className="size-8" />
+      {[...Array(8)].map((_, i) => (
+        <Skeleton key={i} className="size-8" />
+      ))}
     </div>
     <div className="flex flex-col gap-2 p-2">
       <Skeleton className="h-4 w-full rounded-full" />
