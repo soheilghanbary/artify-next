@@ -15,7 +15,7 @@ export default function SettingsAccount() {
   }
 
   return (
-    <div className="mx-auto max-w-2xl rounded-lg border bg-muted/40">
+    <div className="mx-auto max-w-2xl rounded-lg border">
       <div className="border-b p-4">
         <h1 className="font-bold text-2xl/normal">Account Settings</h1>
         <p className="text-foreground/75 text-xs/6 md:text-sm/6">
