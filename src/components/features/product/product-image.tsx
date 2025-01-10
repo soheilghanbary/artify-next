@@ -18,7 +18,7 @@ export const ProductImage = (props: Props) => {
         quality={100}
         draggable={false}
         className={cn(
-          'size-full rounded-[inherit] bg-muted/40 object-cover duration-500',
+          'border size-full rounded-[inherit] bg-muted/40 object-cover duration-500',
           !loaded && 'blur-md grayscale-0'
         )}
         onLoad={() => setLoaded(true)}
