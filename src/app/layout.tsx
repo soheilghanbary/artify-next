@@ -5,7 +5,7 @@ import { Header } from '@/components/layouts/header'
 import Providers from '@/components/providers'
 import { siteConfig } from '@/config/site'
 import type { Metadata } from 'next'
-import { Inter, Onest } from 'next/font/google'
+import { Onest } from 'next/font/google'
 import type { PropsWithChildren } from 'react'
 
 const font = Onest({
@@ -29,7 +29,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en" className={font.className} suppressHydrationWarning>
       <head>
-        <link rel="theme-color" href="#4D6BFE" />
+        <link rel="theme-color" href="#ffffff" />
         <link rel="manifest" href="/manifest.json" />
         <meta
           name="viewport"
