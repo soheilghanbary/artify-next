@@ -22,6 +22,7 @@ export const ProductImage = (props: Props) => {
           !loaded && 'blur-md grayscale-0'
         )}
         onLoad={() => setLoaded(true)}
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         {...props}
       />
     </figure>
