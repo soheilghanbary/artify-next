@@ -12,5 +12,5 @@ export default auth((req) => {
 })
 
 export const config = {
-  matcher: ['/new', '/profile'],
+  matcher: ['/new', '/profile', '/settings', '/settings/:path*'],
 }
