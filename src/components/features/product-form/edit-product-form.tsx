@@ -1,18 +1,27 @@
 'use client'
 import { TextField } from '@/components/common/text-field'
-import { Tiptap } from '@/components/common/tiptap'
+import { TipTapSkeleton } from '@/components/common/tiptap'
 import { LoadingIcon } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { TagsInput } from '@/components/ui/tags-input'
 import { updateProduct } from '@/services/products.service'
 import { zodResolver } from '@hookform/resolvers/zod'
+import dynamic from 'next/dynamic'
 import { useTransition } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { array, z } from 'zod'
 import { SelectCategory } from './select-category'
 import { UploadProductImage } from './upload-product-image'
+
+const RichTextEditor = dynamic(
+  () => import('@/components/common/tiptap').then((mod) => mod.Tiptap),
+  {
+    ssr: false,
+    loading: () => <TipTapSkeleton />,
+  }
+)
 
 type Schema = z.infer<typeof schema>
 
@@ -82,7 +91,7 @@ export const EditProductForm = ({ id, defaultValues }: Props) => {
           name="description"
           control={control}
           render={({ field }) => (
-            <Tiptap value={field.value} onChange={field.onChange} />
+            <RichTextEditor value={field.value} onChange={field.onChange} />
           )}
         />
         {errors.description && (

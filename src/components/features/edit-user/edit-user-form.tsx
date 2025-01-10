@@ -1,6 +1,5 @@
 'use client'
 import { TextField } from '@/components/common/text-field'
-import { Tiptap } from '@/components/common/tiptap'
 import { LoadingIcon } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
@@ -12,6 +11,16 @@ import toast from 'react-hot-toast'
 import { z } from 'zod'
 import { EditUserCover } from './edit-user-cover'
 import { EditUserImage } from './edit-user-image'
+import { TipTapSkeleton } from '@/components/common/tiptap'
+import dynamic from 'next/dynamic'
+
+const RichTextEditor = dynamic(
+  () => import('@/components/common/tiptap').then((mod) => mod.Tiptap),
+  {
+    ssr: false,
+    loading: () => <TipTapSkeleton />,
+  }
+)
 
 const schema = z.object({
   image: z.string(),
@@ -72,7 +81,10 @@ export const EditUserForm = (defaultValues: Schema & { id: string }) => {
       />
       <div className="col-span-2 grid gap-2 [&_label]:text-sm">
         <Label>Biography</Label>
-        <Tiptap value={watch('bio')} onChange={(e) => setValue('bio', e)} />
+        <RichTextEditor
+          value={watch('bio')}
+          onChange={(e) => setValue('bio', e)}
+        />
       </div>
       <TextField
         label="Portfolio URL"

@@ -11,6 +11,7 @@ import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { BoldIcon, Heading2, ImageIcon, LinkIcon, List } from 'lucide-react'
 import { useCallback } from 'react'
+import { Skeleton } from '../ui/skeleton'
 
 type Props = {
   value: string
@@ -142,3 +143,20 @@ export const Tiptap = ({ value, onChange }: Props) => {
     </div>
   )
 }
+
+export const TipTapSkeleton = () => (
+  <div className="rounded-lg border">
+    <div className="flex gap-2 border-b p-2">
+      <Skeleton className="size-8" />
+      <Skeleton className="size-8" />
+      <Skeleton className="size-8" />
+      <Skeleton className="size-8" />
+      <Skeleton className="size-8" />
+    </div>
+    <div className="flex flex-col gap-2 p-2">
+      <Skeleton className="h-4 w-full rounded-full" />
+      <Skeleton className="h-4 w-full rounded-full" />
+      <Skeleton className="h-4 w-full rounded-full" />
+    </div>
+  </div>
+)
