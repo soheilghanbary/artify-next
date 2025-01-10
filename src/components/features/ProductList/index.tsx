@@ -54,7 +54,7 @@ export const MoreProducts = ({
 export const SearchProductList = () => {
   const [query] = useQueryState('q')
   const { data, isPending } = useSearchProducts(query || '')
-  if (isPending) return <ProductsLoader />
+  if (isPending) return <ProductsLoader hideAuthor cols={4} />
   if (!data) return <div>No products found</div>
 
   if (data.length === 0)
@@ -64,7 +64,14 @@ export const SearchProductList = () => {
       </div>
     )
 
-  return <ProductList items={data} />
+  return (
+    <ProductList
+      hideAuthor
+      cols={4}
+      cardOptions={{ showTitle: true }}
+      items={data}
+    />
+  )
 }
 
 export const LikedProductList = () => {
