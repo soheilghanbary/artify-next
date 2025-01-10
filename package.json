@@ -1,7 +1,7 @@
 {
   "name": "artify",
-  "version": "1.0.1",
-  "description": "Discover the world’s top designers",
+  "version": "1.2.1",
+  "description": "A web application for sharing creative products",
   "scripts": {
     "dev": "next dev --turbo",
     "build": "next build",
