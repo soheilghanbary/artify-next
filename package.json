@@ -34,6 +34,7 @@
     "@tiptap/extension-list-item": "^2.11.0",
     "@tiptap/extension-ordered-list": "^2.11.0",
     "@tiptap/extension-placeholder": "^2.10.4",
+    "@tiptap/extension-text-align": "^2.11.0",
     "@tiptap/react": "^2.10.4",
     "@tiptap/starter-kit": "^2.10.4",
     "aws-sdk": "^2.1692.0",

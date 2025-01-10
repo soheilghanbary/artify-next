@@ -7,9 +7,19 @@ import Link from '@tiptap/extension-link'
 import ListItem from '@tiptap/extension-list-item'
 import OrderedList from '@tiptap/extension-ordered-list'
 import Placeholder from '@tiptap/extension-placeholder'
+import TextAlign from '@tiptap/extension-text-align'
 import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
-import { BoldIcon, Heading2, ImageIcon, LinkIcon, List } from 'lucide-react'
+import {
+  AlignCenter,
+  AlignLeft,
+  AlignRight,
+  BoldIcon,
+  Heading2,
+  ImageIcon,
+  LinkIcon,
+  List,
+} from 'lucide-react'
 import { useCallback } from 'react'
 import { Skeleton } from '../ui/skeleton'
 
@@ -42,6 +52,9 @@ export const Tiptap = ({ value, onChange }: Props) => {
           class:
             'relative aspect-[4/3] overflow-hidden rounded-xl object-cover my-3 mx-auto',
         },
+      }),
+      TextAlign.configure({
+        types: ['heading', 'paragraph'],
       }),
     ],
     content: value,
@@ -90,6 +103,13 @@ export const Tiptap = ({ value, onChange }: Props) => {
     }
   }, [editor])
 
+  const setAlignText = useCallback(
+    (align: 'right' | 'center' | 'left') => {
+      editor?.commands.setTextAlign(align)
+    },
+    [editor]
+  )
+
   return (
     <div className="grid rounded-lg border bg-card">
       <div className="sticky top-0 z-10 flex items-center gap-2 rounded-t-[inherit] border-b bg-card p-2">
@@ -137,6 +157,33 @@ export const Tiptap = ({ value, onChange }: Props) => {
           size={'icon'}
         >
           <LinkIcon />
+        </Button>
+        <Button
+          type="button"
+          className="size-8"
+          onClick={() => setAlignText('left')}
+          variant={'ghost'}
+          size={'icon'}
+        >
+          <AlignLeft />
+        </Button>
+        <Button
+          type="button"
+          className="size-8"
+          onClick={() => setAlignText('center')}
+          variant={'ghost'}
+          size={'icon'}
+        >
+          <AlignCenter />
+        </Button>
+        <Button
+          type="button"
+          className="size-8"
+          onClick={() => setAlignText('right')}
+          variant={'ghost'}
+          size={'icon'}
+        >
+          <AlignRight />
         </Button>
       </div>
       <EditorContent editor={editor} className="text-editor" />

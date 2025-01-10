@@ -71,6 +71,9 @@ importers:
       '@tiptap/extension-placeholder':
         specifier: ^2.10.4
         version: 2.10.4(@tiptap/core@2.10.4(@tiptap/pm@2.10.4))(@tiptap/pm@2.10.4)
+      '@tiptap/extension-text-align':
+        specifier: ^2.11.0
+        version: 2.11.0(@tiptap/core@2.10.4(@tiptap/pm@2.10.4))
       '@tiptap/react':
         specifier: ^2.10.4
         version: 2.10.4(@tiptap/core@2.10.4(@tiptap/pm@2.10.4))(@tiptap/pm@2.10.4)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -1299,6 +1302,11 @@ packages:
 
   '@tiptap/extension-strike@2.10.4':
     resolution: {integrity: sha512-OibipsomFpOJWTPVX/z4Z53HgwDA93lE/loHGa+ONJfML1dO6Zd6UTwzaVO1/g8WOwRgwkYu/6JnhxLKRlP8Lg==}
+    peerDependencies:
+      '@tiptap/core': ^2.7.0
+
+  '@tiptap/extension-text-align@2.11.0':
+    resolution: {integrity: sha512-VRXBqO17po6ddqhoWLBa2aCX/tqHdzdKPLfjnBy1fF8hjQKbidzjMWhb4CMm31ApvJjKK/DTkM3EnyYS/XDhng==}
     peerDependencies:
       '@tiptap/core': ^2.7.0
 
@@ -3416,6 +3424,10 @@ snapshots:
       '@tiptap/pm': 2.10.4
 
   '@tiptap/extension-strike@2.10.4(@tiptap/core@2.10.4(@tiptap/pm@2.10.4))':
+    dependencies:
+      '@tiptap/core': 2.10.4(@tiptap/pm@2.10.4)
+
+  '@tiptap/extension-text-align@2.11.0(@tiptap/core@2.10.4(@tiptap/pm@2.10.4))':
     dependencies:
       '@tiptap/core': 2.10.4(@tiptap/pm@2.10.4)
 
