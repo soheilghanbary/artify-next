@@ -21,8 +21,8 @@ export const productsRoutes = new Hono()
   })
   .post('/', async (c) => {
     const values = await c.req.json()
-    const product = await productsService.create(values)
-    return c.json({ message: 'Product created successfully' })
+    const [product] = await productsService.create(values)
+    return c.json({ message: 'Product created successfully', data: product })
   })
   .put('/:id', async (c) => {
     const id = c.req.param('id')

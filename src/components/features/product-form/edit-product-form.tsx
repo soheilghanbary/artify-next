@@ -14,6 +14,7 @@ import toast from 'react-hot-toast'
 import { array, z } from 'zod'
 import { SelectCategory } from './select-category'
 import { UploadProductImage } from './upload-product-image'
+import { useRouter } from 'next/navigation'
 
 const RichTextEditor = dynamic(
   () => import('@/components/common/tiptap').then((mod) => mod.Tiptap),
@@ -39,6 +40,7 @@ const schema = z.object({
 })
 
 export const EditProductForm = ({ id, defaultValues }: Props) => {
+  const router = useRouter()
   const [pending, startTransition] = useTransition()
   const {
     register,
@@ -55,6 +57,7 @@ export const EditProductForm = ({ id, defaultValues }: Props) => {
     startTransition(async () => {
       const res = await updateProduct(id, data)
       toast.success(res.message)
+      router.push(`/products/${id}`)
     })
   })
 

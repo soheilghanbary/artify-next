@@ -1,20 +1,20 @@
 'use client'
 import { TextField } from '@/components/common/text-field'
+import { TipTapSkeleton } from '@/components/common/tiptap'
 import { LoadingIcon } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
-import { Skeleton } from '@/components/ui/skeleton'
 import { TagsInput } from '@/components/ui/tags-input'
-import { createProduct, updateProduct } from '@/services/products.service'
+import { createProduct } from '@/services/products.service'
 import { zodResolver } from '@hookform/resolvers/zod'
 import dynamic from 'next/dynamic'
+import { useRouter } from 'next/navigation'
 import { useTransition } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { array, z } from 'zod'
 import { SelectCategory } from './select-category'
 import { UploadProductImage } from './upload-product-image'
-import { TipTapSkeleton } from '@/components/common/tiptap'
 
 const RichTextEditor = dynamic(
   () => import('@/components/common/tiptap').then((mod) => mod.Tiptap),
@@ -26,7 +26,6 @@ const RichTextEditor = dynamic(
 
 type Props = {
   userId: string
-  type: 'add' | 'edit'
   product?: Schema & { id: string }
 }
 
@@ -41,7 +40,8 @@ const schema = z.object({
   userId: z.string().min(10, 'User ID is required'),
 })
 
-export const AddProductForm = ({ userId, type, product }: Props) => {
+export const AddProductForm = ({ userId, product }: Props) => {
+  const router = useRouter()
   const [pending, startTransition] = useTransition()
   const {
     register,
@@ -63,13 +63,9 @@ export const AddProductForm = ({ userId, type, product }: Props) => {
 
   const onSubmit = handleSubmit(async (data) => {
     startTransition(async () => {
-      if (type === 'add') {
-        const res = await createProduct(data)
-        toast.success(res.message)
-      } else if (type === 'edit' && product) {
-        const res = await updateProduct(product.id, data)
-        toast.success(res.message)
-      }
+      const res = await createProduct(data)
+      toast.success(res.message)
+      router.push(`/products/${res.data.id}`)
     })
   })
 
@@ -153,7 +149,7 @@ export const AddProductForm = ({ userId, type, product }: Props) => {
         className="w-fit"
       >
         {pending && <LoadingIcon className="fill-current" />}
-        {type === 'add' ? 'Save Product' : 'Update Product'}
+        Save Product
       </Button>
     </form>
   )

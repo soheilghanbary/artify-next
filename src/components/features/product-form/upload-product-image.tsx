@@ -21,6 +21,7 @@ export const UploadProductImage = ({ initialImage, onUploaded }: Props) => {
       'image/png': ['.png'],
       'image/jpeg': ['.jpg', '.jpeg'],
       'image/gif': ['.gif'],
+      'image/webp': ['.webp'],
     },
   })
 

@@ -45,7 +45,10 @@ export class ProductsService {
   }
 
   async create(values: any) {
-    return await db.insert(productsTable).values(values)
+    return await db
+      .insert(productsTable)
+      .values(values)
+      .returning({ id: productsTable.id })
   }
 
   async update(id: string, values: any) {
