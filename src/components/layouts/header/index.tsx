@@ -1,17 +1,12 @@
-import {
-  GridViewIcon,
-  Home01Icon,
-  PuzzleIcon,
-  Search01Icon,
-} from '@/components/icons'
+import { Home01Icon, PuzzleIcon, Search01Icon } from '@/components/icons'
 import { Suspense } from 'react'
-import { CheckAuth, CheckAuthSkeleton } from './CheckAuth'
-import { Logo } from './Logo'
-import { NavLink } from './NavLink'
+import { CheckAuth, CheckAuthSkeleton } from './check-auth'
+import { Logo } from './logo'
+import { NavLink } from './nav-link'
 
 export const Header = () => {
   return (
-    <header className="border-b">
+    <header className="sticky top-0 z-10 border-b bg-background/80 backdrop-blur">
       <nav className="container flex items-center justify-between gap-4 px-4 py-2 md:py-4">
         <Logo />
         <nav className="hidden flex-1 items-center gap-1 md:flex">

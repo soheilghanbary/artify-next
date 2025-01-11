@@ -12,8 +12,8 @@ export default async () => {
       <Hero />
       <Suspense>
         <div className="flex items-center justify-between gap-4">
-          <ProductFilter />
           <Categories />
+          <ProductFilter />
         </div>
       </Suspense>
       <Suspense>
