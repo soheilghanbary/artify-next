@@ -12,7 +12,7 @@ export default async () => {
     <>
       <Hero />
       <Suspense>
-        <div className="flex flex-wrap items-center justify-between gap-4">
+        <div className="sticky top-0 z-10 flex flex-wrap items-center justify-between gap-4 border-b bg-background py-4">
           <div className="flex flex-1 items-center gap-2">
             <SearchField />
             <ProductFilter />
