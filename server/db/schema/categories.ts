@@ -11,7 +11,10 @@ export const categoriesTable = pgTable('categories', {
   slug: text('slug').notNull(),
   description: text('description').default(''),
   createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at'),
+  updatedAt: timestamp('updated_at')
+    .defaultNow()
+    .$onUpdate(() => new Date())
+    .notNull(),
 })
 
 export const categoriesRelations = relations(categoriesTable, ({ many }) => ({

@@ -25,7 +25,8 @@ export const usersTable = pgTable(
     createdAt: timestamp('created_at').defaultNow(),
     updatedAt: timestamp('updated_at')
       .defaultNow()
-      .$onUpdateFn(() => new Date()),
+      .$onUpdate(() => new Date())
+      .notNull(),
     title: text('title').notNull().default('a artify person'),
     bio: text('bio').default('Hello, I am also a member of the Artify family.'),
     portfolio: text('portfolio').default(''),

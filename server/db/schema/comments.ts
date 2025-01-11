@@ -16,7 +16,10 @@ export const commentsTable = pgTable('comments', {
     .references(() => productsTable.id, { onDelete: 'cascade' }),
   text: text('text').notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at')
+    .defaultNow()
+    .$onUpdate(() => new Date())
+    .notNull(),
 })
 
 export const commentsRelations = relations(commentsTable, ({ one }) => ({
