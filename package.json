@@ -1,6 +1,6 @@
 {
   "name": "artify",
-  "version": "1.2.1",
+  "version": "1.4.0",
   "description": "A web application for sharing creative products",
   "scripts": {
     "dev": "next dev --turbo",
