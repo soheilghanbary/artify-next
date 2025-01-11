@@ -17,7 +17,8 @@ import { ProductList } from '../product-list'
 import { ProductsLoader } from './ProductListLoader'
 
 export const AllProducts = () => {
-  const { data, isPending } = useAllProducts()
+  const [filter] = useQueryState('filter')
+  const { data, isPending } = useAllProducts({ filter })
   if (isPending) return <ProductsLoader />
   if (!data) return <div>No products found</div>
 

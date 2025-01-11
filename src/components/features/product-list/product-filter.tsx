@@ -25,11 +25,8 @@ export const ProductFilter = () => {
       <DropdownMenuContent align="start">
         <DropdownMenuLabel>Filter</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onSelect={() => setFilter('popular')}>
-          Popular
-        </DropdownMenuItem>
         <DropdownMenuItem onSelect={() => setFilter('viewest')}>
-          Reviewed
+          Viewest
         </DropdownMenuItem>
         <DropdownMenuItem onSelect={() => setFilter('newest')}>
           Newest

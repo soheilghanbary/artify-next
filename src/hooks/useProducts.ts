@@ -27,13 +27,18 @@ export const useSearchProducts = (query: string) => {
   })
 }
 
-export const useAllProducts = () => {
+export const useAllProducts = ({ filter }: { filter: string | null }) => {
   return useQuery<ProductProps[], Error>({
-    queryKey: ['products'],
-    queryFn: () => fetch('/api/products').then((res) => res.json()),
-    refetchOnMount: true,
-    refetchOnReconnect: true,
-    refetchOnWindowFocus: true,
+    queryKey: ['products', filter],
+    queryFn: () => {
+      if (filter) {
+        return fetch(`/api/products?filter=${filter}`).then((res) => res.json())
+      }
+      return fetch('/api/products').then((res) => res.json())
+    },
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+    refetchOnWindowFocus: false,
   })
 }
 

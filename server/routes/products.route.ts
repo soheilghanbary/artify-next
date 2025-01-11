@@ -6,7 +6,8 @@ const productsService = new ProductsService()
 export const productsRoutes = new Hono()
   .get('/', async (c) => {
     const userId = c.req.query('userId')
-    const products = await productsService.getAll(userId)
+    const filter = c.req.query('filter')
+    const products = await productsService.getAll(userId, filter)
     return c.json(products)
   })
   .get('/search', async (c) => {

@@ -1,9 +1,8 @@
-import { ProductsLoader } from '@/components/features/ProductList/ProductListLoader'
+import { AllProducts } from '@/components/features/ProductList'
 import { Hero } from '@/components/features/hero'
-import { ProductFilter, ProductList } from '@/components/features/product-list'
+import { ProductFilter } from '@/components/features/product-list'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { getAllCategories } from '@/services/categories.service'
-import { getAllProducts } from '@/services/products.service'
 import Link from 'next/link'
 import { Suspense } from 'react'
 
@@ -17,16 +16,11 @@ export default async () => {
           <Categories />
         </div>
       </Suspense>
-      <Suspense fallback={<ProductsLoader />}>
+      <Suspense>
         <AllProducts />
       </Suspense>
     </>
   )
-}
-
-const AllProducts = async () => {
-  const products = await getAllProducts()
-  return <ProductList items={products} />
 }
 
 const Categories = async () => {

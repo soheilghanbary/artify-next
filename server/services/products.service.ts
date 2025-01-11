@@ -3,7 +3,7 @@ import { db } from '../db'
 import { productsTable } from '../db/schema'
 
 export class ProductsService {
-  async getAll(userId?: string) {
+  async getAll(userId?: string, filter?: string) {
     if (userId) {
       return await db.query.productsTable.findMany({
         where: eq(productsTable.userId, userId),
@@ -15,6 +15,29 @@ export class ProductsService {
         },
       })
     }
+
+    if (filter === 'viewest') {
+      return await db.query.productsTable.findMany({
+        orderBy: desc(productsTable.view),
+        with: {
+          user: {
+            columns: { id: true, name: true, image: true, username: true },
+          },
+        },
+      })
+    }
+
+    if (filter === 'newest') {
+      return await db.query.productsTable.findMany({
+        orderBy: desc(productsTable.createdAt),
+        with: {
+          user: {
+            columns: { id: true, name: true, image: true, username: true },
+          },
+        },
+      })
+    }
+
     return await db.query.productsTable.findMany({
       orderBy: desc(productsTable.createdAt),
       with: {
