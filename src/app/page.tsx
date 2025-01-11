@@ -10,10 +10,12 @@ export default async () => {
   return (
     <>
       <Hero />
-      <div className="flex items-center justify-between gap-4">
-        <ProductFilter />
-        <Categories />
-      </div>
+      <Suspense>
+        <div className="flex items-center justify-between gap-4">
+          <ProductFilter />
+          <Categories />
+        </div>
+      </Suspense>
       <Suspense fallback={<ProductsLoader />}>
         <AllProducts />
       </Suspense>
