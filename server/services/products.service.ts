@@ -2,43 +2,20 @@ import { and, arrayContains, desc, eq, ilike, ne, or, sql } from 'drizzle-orm'
 import { db } from '../db'
 import { productsTable } from '../db/schema'
 
+type GetAllOptions = {
+  userId?: string | null
+  filter?: string | null
+  query?: string | null
+}
+
+const commonWith = {
+  user: {
+    columns: { id: true, name: true, image: true, username: true },
+  },
+}
 export class ProductsService {
-  async getAll(userId?: string, filter?: string) {
-    if (userId) {
-      return await db.query.productsTable.findMany({
-        where: eq(productsTable.userId, userId),
-        orderBy: desc(productsTable.createdAt),
-        with: {
-          user: {
-            columns: { id: true, name: true, image: true, username: true },
-          },
-        },
-      })
-    }
-
-    if (filter === 'viewest') {
-      return await db.query.productsTable.findMany({
-        orderBy: desc(productsTable.view),
-        with: {
-          user: {
-            columns: { id: true, name: true, image: true, username: true },
-          },
-        },
-      })
-    }
-
-    if (filter === 'newest') {
-      return await db.query.productsTable.findMany({
-        orderBy: desc(productsTable.createdAt),
-        with: {
-          user: {
-            columns: { id: true, name: true, image: true, username: true },
-          },
-        },
-      })
-    }
-
-    return await db.query.productsTable.findMany({
+  async getAll({ userId, filter, query }: GetAllOptions) {
+    const baseQuery = db.query.productsTable.findMany({
       orderBy: desc(productsTable.createdAt),
       with: {
         user: {
@@ -46,6 +23,40 @@ export class ProductsService {
         },
       },
     })
+
+    if (query) {
+      return await db.query.productsTable.findMany({
+        where: or(
+          ilike(productsTable.title, `%${query}%`),
+          arrayContains(productsTable.tags, [query])
+        ),
+        with: commonWith,
+      })
+    }
+
+    if (userId) {
+      return await db.query.productsTable.findMany({
+        where: eq(productsTable.userId, userId),
+        orderBy: desc(productsTable.createdAt),
+        with: commonWith,
+      })
+    }
+
+    if (filter === 'viewest') {
+      return await db.query.productsTable.findMany({
+        orderBy: desc(productsTable.view),
+        with: commonWith,
+      })
+    }
+
+    if (filter === 'newest') {
+      return await db.query.productsTable.findMany({
+        orderBy: desc(productsTable.createdAt),
+        with: commonWith,
+      })
+    }
+
+    return await baseQuery
   }
 
   async getById(id: string) {

@@ -5,10 +5,16 @@ const productsService = new ProductsService()
 
 export const productsRoutes = new Hono()
   .get('/', async (c) => {
-    const userId = c.req.query('userId')
-    const filter = c.req.query('filter')
-    const products = await productsService.getAll(userId, filter)
-    return c.json(products)
+    try {
+      const userId = c.req.query('userId') || null
+      const filter = c.req.query('filter') || null
+      const query = c.req.query('q') || null
+      const products = await productsService.getAll({ userId, filter, query })
+      return c.json(products)
+    } catch (error) {
+      console.error(error)
+      return c.json({ message: 'Failed to fetch products' }, 500)
+    }
   })
   .get('/search', async (c) => {
     const query = c.req.query('q')!

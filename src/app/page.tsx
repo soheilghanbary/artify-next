@@ -1,6 +1,7 @@
 import { AllProducts } from '@/components/features/ProductList'
 import { Hero } from '@/components/features/hero'
 import { ProductFilter } from '@/components/features/product-list'
+import { SearchField } from '@/components/features/search-field'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { getAllCategories } from '@/services/categories.service'
 import Link from 'next/link'
@@ -11,9 +12,12 @@ export default async () => {
     <>
       <Hero />
       <Suspense>
-        <div className="flex items-center justify-between gap-4">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div className="flex flex-1 items-center gap-2">
+            <SearchField />
+            <ProductFilter />
+          </div>
           <Categories />
-          <ProductFilter />
         </div>
       </Suspense>
       <Suspense>

@@ -27,14 +27,34 @@ export const useSearchProducts = (query: string) => {
   })
 }
 
-export const useAllProducts = ({ filter }: { filter: string | null }) => {
+type Options = {
+  filters?: Record<string, string | null> // چندین فیلتر را به‌صورت داینامیک پشتیبانی می‌کند
+  query?: string | null // جستجو
+}
+
+export const useAllProducts = ({ filters = {}, query }: Options) => {
+  // تبدیل فیلترها به یک رشته کوئری
+  const buildQueryString = (params: Record<string, string | null>): string => {
+    const queryEntries = Object.entries(params)
+      .filter(([_, value]) => value !== null && value !== '') // فقط فیلترهای معتبر
+      .map(
+        ([key, value]) =>
+          `${encodeURIComponent(key)}=${encodeURIComponent(value!)}`
+      ) // escape کردن ورودی‌ها برای امنیت
+    return queryEntries.join('&')
+  }
+
   return useQuery<ProductProps[], Error>({
-    queryKey: ['products', filter],
+    queryKey: ['products', filters, query], // با توجه به تغییر در فیلترها، کش به‌درستی مدیریت می‌شود
     queryFn: () => {
-      if (filter) {
-        return fetch(`/api/products?filter=${filter}`).then((res) => res.json())
-      }
-      return fetch('/api/products').then((res) => res.json())
+      const queryString = buildQueryString({ ...filters, q: query! }) // ترکیب فیلترها و کوئری
+      const endpoint = queryString
+        ? `/api/products?${queryString}`
+        : '/api/products'
+      return fetch(endpoint).then((res) => {
+        if (!res.ok) throw new Error('Failed to fetch products')
+        return res.json()
+      })
     },
     refetchOnMount: false,
     refetchOnReconnect: false,
