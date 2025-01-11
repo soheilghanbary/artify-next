@@ -37,6 +37,17 @@ export const useAllProducts = () => {
   })
 }
 
+export const useCategoryProducts = (slug: string) => {
+  return useQuery<ProductProps[], Error>({
+    queryKey: ['category-products', slug],
+    queryFn: () =>
+      fetch(`/api/products/category/${slug}`).then((res) => res.json()),
+    refetchOnMount: false,
+    refetchOnReconnect: true,
+    refetchOnWindowFocus: false,
+  })
+}
+
 export const useUserProducts = () => {
   return useQuery<ProductProps[], Error>({
     queryKey: ['user-products'],

@@ -46,3 +46,8 @@ export const productsRoutes = new Hono()
     const product = await productsService.getMoreById(id, userId)
     return c.json(product)
   })
+  .get('/category/:slug', async (c) => {
+    const { slug } = c.req.param()
+    const products = await productsService.getAllByCategory(slug)
+    return c.json(products)
+  })

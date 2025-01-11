@@ -1,4 +1,9 @@
-import { Home01Icon, PuzzleIcon, Search01Icon } from '@/components/icons'
+import {
+  GridViewIcon,
+  Home01Icon,
+  PuzzleIcon,
+  Search01Icon,
+} from '@/components/icons'
 import { Suspense } from 'react'
 import { CheckAuth, CheckAuthSkeleton } from './CheckAuth'
 import { Logo } from './Logo'
@@ -11,6 +16,7 @@ export const Header = () => {
         <Logo />
         <nav className="hidden flex-1 items-center gap-1 md:flex">
           <NavLink href="/" label="Home" icon={Home01Icon} />
+          <NavLink href="/categories" label="Categories" icon={GridViewIcon} />
           <NavLink href="/search" label="Search" icon={Search01Icon} />
           <NavLink href="/about" label="About" icon={PuzzleIcon} />
         </nav>

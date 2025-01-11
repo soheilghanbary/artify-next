@@ -1,6 +1,7 @@
 'use client'
 import {
   useAllProducts,
+  useCategoryProducts,
   useCollectionProducts,
   useInfinityProducts,
   useLikedProducts,
@@ -17,6 +18,14 @@ import { ProductsLoader } from './ProductListLoader'
 
 export const AllProducts = () => {
   const { data, isPending } = useAllProducts()
+  if (isPending) return <ProductsLoader />
+  if (!data) return <div>No products found</div>
+
+  return <ProductList items={data} />
+}
+
+export const CategoryProducts = ({ slug }: { slug: string }) => {
+  const { data, isPending } = useCategoryProducts(slug)
   if (isPending) return <ProductsLoader />
   if (!data) return <div>No products found</div>
 

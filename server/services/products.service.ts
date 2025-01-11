@@ -91,4 +91,16 @@ export class ProductsService {
       },
     })
   }
+
+  async getAllByCategory(slug: string) {
+    return await db.query.productsTable.findMany({
+      where: eq(productsTable.categoryId, slug),
+      orderBy: desc(productsTable.createdAt),
+      with: {
+        user: {
+          columns: { id: true, name: true, image: true, username: true },
+        },
+      },
+    })
+  }
 }

@@ -19,7 +19,6 @@ const ProductImage = ({
   return (
     <Link
       className="relative aspect-[4/3] overflow-hidden rounded-xl border border-border/40"
-      prefetch={true}
       href={`/products/${id}`}
     >
       <Image

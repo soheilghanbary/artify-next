@@ -2,17 +2,6 @@
 import { SearchProductList } from '@/components/features/ProductList'
 import { SearchField } from '@/components/features/search-field'
 import { cn } from '@/lib/utils'
-import {
-  BirdIcon,
-  BoltIcon,
-  EarthIcon,
-  FeatherIcon,
-  HexagonIcon,
-  PencilRulerIcon,
-  PilcrowIcon,
-  SmartphoneIcon,
-  SmileIcon,
-} from 'lucide-react'
 import { useQueryState } from 'nuqs'
 import { Suspense } from 'react'
 
@@ -94,22 +83,6 @@ export default () => {
   return (
     <Suspense>
       <Hero />
-      <div className="grid grid-cols-2 gap-4 pb-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-        <CategoryCard icon={PilcrowIcon} title="Typography" color="rose" />
-        <CategoryCard icon={EarthIcon} title="Website" color="blue" />
-        <CategoryCard icon={BirdIcon} title="Animations" color="green" />
-        <CategoryCard icon={PencilRulerIcon} title="UI Design" color="purple" />
-        <CategoryCard
-          icon={PencilRulerIcon}
-          title="Illustration"
-          color="cyan"
-        />
-        <CategoryCard icon={SmartphoneIcon} title="Mobile" color="teal" />
-        <CategoryCard icon={FeatherIcon} title="Logo" color="violet" />
-        <CategoryCard icon={HexagonIcon} title="Branding" color="slate" />
-        <CategoryCard icon={SmileIcon} title="Character" color="emerald" />
-        <CategoryCard icon={BoltIcon} title="Product Design" color="amber" />
-      </div>
       <SearchProducts />
     </Suspense>
   )
