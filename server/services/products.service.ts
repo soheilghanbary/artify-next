@@ -15,48 +15,34 @@ const commonWith = {
 }
 export class ProductsService {
   async getAll({ userId, filter, query }: GetAllOptions) {
-    const baseQuery = db.query.productsTable.findMany({
-      orderBy: desc(productsTable.createdAt),
+    const conditions = []
+    if (query) {
+      conditions.push(
+        or(
+          ilike(productsTable.title, `%${query}%`),
+          arrayContains(productsTable.tags, [query])
+        )
+      )
+    }
+
+    if (userId) {
+      conditions.push(eq(productsTable.userId, userId))
+    }
+
+    const orderByCondition =
+      filter === 'viewest'
+        ? desc(productsTable.view)
+        : desc(productsTable.createdAt)
+
+    return await db.query.productsTable.findMany({
+      where: conditions.length > 0 ? and(...conditions) : undefined,
+      orderBy: orderByCondition,
       with: {
         user: {
           columns: { id: true, name: true, image: true, username: true },
         },
       },
     })
-
-    if (query) {
-      return await db.query.productsTable.findMany({
-        where: or(
-          ilike(productsTable.title, `%${query}%`),
-          arrayContains(productsTable.tags, [query])
-        ),
-        with: commonWith,
-      })
-    }
-
-    if (userId) {
-      return await db.query.productsTable.findMany({
-        where: eq(productsTable.userId, userId),
-        orderBy: desc(productsTable.createdAt),
-        with: commonWith,
-      })
-    }
-
-    if (filter === 'viewest') {
-      return await db.query.productsTable.findMany({
-        orderBy: desc(productsTable.view),
-        with: commonWith,
-      })
-    }
-
-    if (filter === 'newest') {
-      return await db.query.productsTable.findMany({
-        orderBy: desc(productsTable.createdAt),
-        with: commonWith,
-      })
-    }
-
-    return await baseQuery
   }
 
   async getById(id: string) {
