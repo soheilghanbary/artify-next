@@ -8,11 +8,6 @@ type GetAllOptions = {
   query?: string | null
 }
 
-const commonWith = {
-  user: {
-    columns: { id: true, name: true, image: true, username: true },
-  },
-}
 export class ProductsService {
   async getAll({ userId, filter, query }: GetAllOptions) {
     const conditions = []
