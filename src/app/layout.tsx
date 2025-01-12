@@ -6,6 +6,7 @@ import Providers from '@/components/providers'
 import { siteConfig } from '@/config/site'
 import type { Metadata } from 'next'
 import { Onest } from 'next/font/google'
+import NextTopLoader from 'nextjs-toploader'
 import type { PropsWithChildren } from 'react'
 
 const font = Onest({
@@ -37,6 +38,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         />
       </head>
       <body>
+        <NextTopLoader color="hsl(var(--primary))" />
         <Providers>
           <Header />
           <div className="container min-h-screen space-y-4 p-4">{children}</div>
