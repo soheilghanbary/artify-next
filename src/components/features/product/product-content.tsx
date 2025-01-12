@@ -45,7 +45,7 @@ export const ProductContent = ({
           <div className="inline-flex flex-wrap items-center gap-1">
             {tags.map((tag) => (
               <Link key={tag} href={`/search?q=${tag}`}>
-                <Badge variant={'secondary'}>{tag}</Badge>
+                <Badge variant={'secondary'}>#{tag}</Badge>
               </Link>
             ))}
           </div>
