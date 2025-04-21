@@ -29,6 +29,7 @@ const ProductImage = ({
         className={cn('size-full rounded-[inherit] bg-muted object-cover')}
         loading="lazy"
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        unoptimized // becaouse my vercel is limited to load image
       />
     </Link>
   )
