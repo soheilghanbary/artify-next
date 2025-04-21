@@ -8,13 +8,13 @@ import { TagsInput } from '@/components/ui/tags-input'
 import { updateProduct } from '@/services/products.service'
 import { zodResolver } from '@hookform/resolvers/zod'
 import dynamic from 'next/dynamic'
+import { useRouter } from 'next/navigation'
 import { useTransition } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { array, z } from 'zod'
 import { SelectCategory } from './select-category'
 import { UploadProductImage } from './upload-product-image'
-import { useRouter } from 'next/navigation'
 
 const RichTextEditor = dynamic(
   () => import('@/components/common/tiptap').then((mod) => mod.Tiptap),

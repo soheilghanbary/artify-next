@@ -1,18 +1,18 @@
 'use client'
 import { TextField } from '@/components/common/text-field'
+import { TipTapSkeleton } from '@/components/common/tiptap'
 import { LoadingIcon } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { updateUser } from '@/services/user.service'
 import { zodResolver } from '@hookform/resolvers/zod'
+import dynamic from 'next/dynamic'
 import { useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { z } from 'zod'
 import { EditUserCover } from './edit-user-cover'
 import { EditUserImage } from './edit-user-image'
-import { TipTapSkeleton } from '@/components/common/tiptap'
-import dynamic from 'next/dynamic'
 
 const RichTextEditor = dynamic(
   () => import('@/components/common/tiptap').then((mod) => mod.Tiptap),
