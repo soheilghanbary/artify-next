@@ -23,6 +23,7 @@ export const ProductImage = (props: Props) => {
         )}
         onLoad={() => setLoaded(true)}
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        unoptimized // becaouse my vercel is limited to load image
         {...props}
       />
     </figure>
